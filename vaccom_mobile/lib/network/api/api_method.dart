@@ -99,7 +99,7 @@ extension ApiMethod on API {
         headers: {'authorization': basicAuth},
       );
 
-      var responseJson = json.decode(response.body);
+      var responseJson = _processResponse(response);
       logger.info(responseJson);
       return responseJson;
     } catch (e) {
@@ -115,15 +115,6 @@ extension ApiMethod on API {
         logger.info(responseJson);
         return responseJson;
         break;
-      case 400:
-        throw BadRequestException(response.body);
-      case 401:
-
-      /// Handle Refresh token here
-
-      case 403:
-        throw UnauthorisedException(response.body);
-      case 500:
       default:
         throw FetchDataException('Lỗi kết nối: ${response.statusCode}');
     }
