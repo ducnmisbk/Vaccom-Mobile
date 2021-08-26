@@ -8,6 +8,6 @@ class AppColor {
   static const nearlyBlack = Color(0xFF213333);
   static const subBlue = Color(0xFF00B6F0);
   static const link = Color(0xFF1a73e8);
-  static const border = Color(0xFF818084);
+  static const border = Color(0xFFCECECE);
   static const error = Color(0xFFdd4d4d);
 }

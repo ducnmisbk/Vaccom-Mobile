@@ -115,8 +115,8 @@ class _PasswordInputState extends State<PasswordInput> {
                   color: invalid
                       ? AppColor.error
                       : isFocus
-                      ? AppColor.main
-                      : AppColor.border,
+                          ? AppColor.main
+                          : AppColor.border,
                 ),
                 borderRadius: BorderRadius.circular(4),
               ),
@@ -127,7 +127,10 @@ class _PasswordInputState extends State<PasswordInput> {
                     child: TextFormField(
                       controller: widget.controller,
                       focusNode: _focusNode,
-                      style: widget.style ?? GoogleFonts.lato(),
+                      style: widget.style ??
+                          GoogleFonts.lato(
+                            // color: AppColor.main,
+                          ),
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.zero,
@@ -142,15 +145,15 @@ class _PasswordInputState extends State<PasswordInput> {
                   ),
                   (showHideSecure)
                       ? IconButton(
-                    onPressed: changeObscureText,
-                    icon: Icon(
-                      obscureText
-                          ? Icons.visibility_off
-                          : Icons.visibility,
-                      color: Colors.grey[600],
-                      size: 20,
-                    ),
-                  )
+                          onPressed: changeObscureText,
+                          icon: Icon(
+                            obscureText
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: Colors.grey[600],
+                            size: 20,
+                          ),
+                        )
                       : SizedBox(),
                 ],
               ),
@@ -166,7 +169,7 @@ class _PasswordInputState extends State<PasswordInput> {
             child: Text(
               widget.label,
               style: GoogleFonts.roboto(
-                color: isFocus ? AppColor.main : AppColor.border,
+                color: isFocus ? AppColor.main : Color(0xFF818084),
               ),
             ),
           ),

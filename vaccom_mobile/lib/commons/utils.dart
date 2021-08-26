@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_logger/simple_logger.dart';
 import 'package:vaccom_mobile/commons/constants.dart';
+import 'package:vaccom_mobile/network/response/mapping/vac_token.dart';
 import 'package:vaccom_mobile/router/router.dart';
 
 /// LOGGER
@@ -22,12 +23,24 @@ class Utils {
   static Future<void> revokeToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove(AppConstant.accessToken);
+    prefs.remove(AppConstant.userId);
   }
 
   static Future<String> getAppToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String accessToken = prefs.getString(AppConstant.accessToken) ?? '';
     return accessToken;
+  }
+
+  static Future<int> getUserID() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getInt(AppConstant.userId);
+  }
+
+  static Future<void> saveToken(VacToken token) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(AppConstant.accessToken, token.accessToken);
+    prefs.setInt(AppConstant.userId, token.userId);
   }
 
   static void logout() {

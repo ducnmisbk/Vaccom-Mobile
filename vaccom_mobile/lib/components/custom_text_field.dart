@@ -140,7 +140,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     child: TextFormField(
                       controller: widget.controller,
                       focusNode: _focusNode,
-                      style: widget.style ?? GoogleFonts.lato(),
+                      style: widget.style ??
+                          GoogleFonts.roboto(
+                            // color: AppColor.main,
+                          ),
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.zero,
@@ -177,7 +180,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             child: Text(
               widget.label,
               style: GoogleFonts.roboto(
-                color: isFocus ? AppColor.main : AppColor.border,
+                color: isFocus ? AppColor.main : Color(0xFF818084),
               ),
             ),
           ),

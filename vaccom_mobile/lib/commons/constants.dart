@@ -8,6 +8,7 @@ class AppConstant {
   static String deviceKey = 'device-key';
   static String username = 'username';
   static String password = 'password';
+  static String userId = 'user_id';
 
   static const int REQUEST_TIME_OUT = 60;
 }

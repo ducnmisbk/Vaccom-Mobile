@@ -35,7 +35,7 @@ class MainItemView extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(8.0)),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    color: AppColor.main.withOpacity(0.3),
+                    color: AppColor.grey.withOpacity(0.3),
                     blurRadius: 3.0,
                   ),
                 ],

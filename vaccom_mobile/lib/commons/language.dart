@@ -13,6 +13,8 @@ class MultiLanguage extends Translations {
       'password': r'Mật khẩu',
       'forgot_password': r'Quên mật khẩu?',
       'cancel': r'Bỏ qua',
+      'confirm': r'Xác nhận',
+      'confirm_logout': r'Bạn có muốn đăng xuất không?',
     },
     'en': {
       'login': r'Login',
@@ -21,6 +23,8 @@ class MultiLanguage extends Translations {
       'password': r'Password',
       'forgot_password': r'Forgot password?',
       'cancel': r'Cancel',
+      'confirm': r'Confirm',
+      'confirm_logout': r'Do you want to logout?',
     },
   };
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccom_mobile/commons/color.dart';
+import 'package:vaccom_mobile/commons/toast.dart';
 import 'package:vaccom_mobile/commons/utils.dart';
 import 'package:vaccom_mobile/model/menu_item.dart';
-
+import 'package:get/get.dart';
+import 'package:vaccom_mobile/network/global.dart';
 import 'main_item_view.dart';
 
 class MainPage extends StatefulWidget {
@@ -70,10 +72,11 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
                     children: [
                       Center(
                         child: Text(
-                          r'Trang chủ',
+                          r'Dashboard',
                           style: GoogleFonts.roboto(
                             color: AppColor.nearlyWhite,
                             fontWeight: FontWeight.w500,
+                            fontSize: 15
                           ),
                         ),
                       ),
@@ -85,17 +88,34 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
                             child: Icon(
                               Icons.logout,
                               color: Colors.white,
-                              size: 18,
+                              size: 22,
                             ),
                           ),
                           onTap: () => Utils.showAwesomeDialog(
                             context,
-                            title: r'Xác nhận',
-                            message: r'Bạn có chắc chắn đăng xuất không?',
+                            title: 'confirm'.tr,
+                            message: 'confirm_logout'.tr,
                             isDestructive: true,
                             dismissOnTouchOutside: true,
                             onPressedOK: () => Utils.logout(),
                           ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: InkWell(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Icon(
+                              Icons.person_pin,
+                              color: Colors.white,
+                              size: 22,
+                            ),
+                          ),
+                          onTap: () {
+                            final user = Global.shared.currentUser;
+                            Toast.show(text: user.hoVaTen);
+                          },
                         ),
                       )
                     ],

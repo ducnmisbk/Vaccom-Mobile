@@ -6,6 +6,7 @@ import 'package:vaccom_mobile/commons/utils.dart';
 import 'package:vaccom_mobile/components/custom_text_field.dart';
 import 'package:get/get.dart';
 import 'package:vaccom_mobile/components/password_input.dart';
+import 'package:vaccom_mobile/network/global.dart';
 import 'package:vaccom_mobile/pages/login/login_vm.dart';
 import 'package:vaccom_mobile/router/router.dart';
 
@@ -38,9 +39,17 @@ class _LoginPage extends State<LoginPage> {
     Toast.showLoading();
 
     viewModel.login().then((value) {
+      Utils.saveToken(value);
+      getUser(value.userId);
+    }).catchError((e) => Toast.show(text: e.toString()));
+  }
+
+  void getUser(int id) {
+    viewModel.getUser(id).then((value) {
       Toast.dismiss();
+      Global.shared.saveUser(value);
       Get.offAndToNamed(GetRouter.main);
-    });
+    }).catchError((e) => Toast.show(text: e.toString()));
   }
 
   @override
@@ -142,7 +151,6 @@ class _LoginPage extends State<LoginPage> {
                               CustomTextField(
                                 controller: viewModel.usernameCtrl,
                                 label: 'username'.tr,
-                                style: GoogleFonts.roboto(),
                                 type: CustomTextFieldType.username,
                                 onSubmitted: (_) => FocusScope.of(context)
                                     .requestFocus(_focusNode),

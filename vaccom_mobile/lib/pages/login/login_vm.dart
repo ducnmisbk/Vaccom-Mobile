@@ -1,6 +1,5 @@
-
 import 'package:flutter/material.dart';
-import 'package:vaccom_mobile/commons/utils.dart';
+import 'package:vaccom_mobile/network/response/response.dart';
 import 'package:vaccom_mobile/view_model/base.dart';
 
 class LoginViewModel extends BaseViewModel {
@@ -18,15 +17,11 @@ class LoginViewModel extends BaseViewModel {
     passwordCtrl.text = r'fds@22021';
   }
 
-  Future<bool> login() async {
-    var params = {
-      'username': username,
-      'password': password
-    };
-    logger.info(params);
+  Future<VacToken> login() async {
+    return api.securityToken(username: username, password: password);
+  }
 
-    await Future.delayed(Duration(milliseconds: 1000));
-
-    return true;
+  Future<User> getUser(int userId) async {
+    return api.getUser(userId: userId);
   }
 }
