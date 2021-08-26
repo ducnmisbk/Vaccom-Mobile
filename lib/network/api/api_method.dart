@@ -94,6 +94,7 @@ extension ApiMethod on API {
     logger.info(basicAuth);
 
     try {
+      logger.info(Uri.parse(Global.shared.endpoint(ApiPath.login.path)));
       var response = await http.post(
         Uri.parse(Global.shared.endpoint(ApiPath.login.path)),
         headers: {'authorization': basicAuth},

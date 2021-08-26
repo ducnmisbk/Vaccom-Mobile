@@ -17,7 +17,7 @@ class MainPage extends StatefulWidget {
 class _MainPage extends State<MainPage> with TickerProviderStateMixin {
   AnimationController animationController;
   bool isLoading = true;
-
+  int _selectedIndex = 0;
   List<MenuItem> menuList = [];
 
   @override
@@ -37,6 +37,12 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
     super.initState();
   }
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   buildMenuList() {
     // TODO: Hiển thị menu item theo tài khoản đăng nhập
     return [
@@ -48,13 +54,40 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    var scaffoldKey = GlobalKey<ScaffoldState>();
+
+    List<DrawerItemData> drawerData = [
+      DrawerItemData(title: 'Checkin y tế tại điểm tiêm chủng'),
+      DrawerItemData(title: 'Xem thông tin lịch sử tiêm chủng'),
+      DrawerItemData(title: 'Xác nhận lịch hẹn tiêm'),
+      DrawerItemData(title: 'Cập nhật diễn biến sau tiêm'),
+      DrawerItemData(title: 'Nhập đăng kí đối tượng tiêm mới'),
+      DrawerItemData(title: 'Duyệt danh sách đối tượng tiêm mới'),
+      DrawerItemData(title: 'Tra cứu danh sách đối tượng chính thức'),
+      DrawerItemData(title: 'Xác nhận danh sách gọi tiêm'),
+      DrawerItemData(title: 'Quản lý danh sách checkin'),
+      DrawerItemData(title: 'Nhập kết quả sau tiêm'),
+    ];
+
     return WillPopScope(
       onWillPop: () async {
         return false;
       },
       child: Scaffold(
+        key: scaffoldKey,
+        drawer: Drawer(
+          child: ListView(
+              // Important: Remove any padding from the ListView.
+              padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+              children: List.generate(drawerData.length, (int index) {
+                return ListTile(
+                  title: Text(drawerData[index].title),
+                  onTap: drawerData[index].onTap,
+                );
+              })),
+        ),
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(36),
+          preferredSize: Size.fromHeight(AppBar().preferredSize.height),
           child: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -74,10 +107,9 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
                         child: Text(
                           r'Dashboard',
                           style: GoogleFonts.roboto(
-                            color: AppColor.nearlyWhite,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15
-                          ),
+                              color: AppColor.nearlyWhite,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15),
                         ),
                       ),
                       Align(
@@ -113,8 +145,9 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
                             ),
                           ),
                           onTap: () {
-                            final user = Global.shared.currentUser;
-                            Toast.show(text: user.hoVaTen);
+                            // final user = Global.shared.currentUser;
+                            // Toast.show(text: user.hoVaTen);
+                            scaffoldKey.currentState.openDrawer();
                           },
                         ),
                       )
@@ -157,7 +190,37 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
             childAspectRatio: 1,
           ),
         ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Checkin y tế',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.business),
+              label: 'Lịch sử tiêm chủng',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.qr_code),
+              label: 'QR của bạn',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.more),
+              label: 'Thêm',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          unselectedItemColor: Colors.grey,
+          selectedItemColor: Colors.blue,
+          onTap: _onItemTapped,
+        ),
       ),
     );
   }
+}
+
+class DrawerItemData {
+  String title = '';
+  Function onTap = () => {};
+  DrawerItemData({this.title, this.onTap});
 }
