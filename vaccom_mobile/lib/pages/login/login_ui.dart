@@ -184,7 +184,6 @@ class _LoginPage extends State<LoginPage> {
                 height: Get.height,
                 decoration: BoxDecoration(),
                 child: Container(
-                  padding: EdgeInsets.only(bottom: 140),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -238,8 +237,8 @@ class _LoginPage extends State<LoginPage> {
                               padding: const EdgeInsets.only(top: 10),
                               child: header,
                             ),
-                            left: 24,
-                            right: 24,
+                            left: 16,
+                            right: 16,
                             top: -10,
                           ),
                         ],
