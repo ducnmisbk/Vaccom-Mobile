@@ -77,7 +77,7 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
             child: DrawerHeader(
               margin: EdgeInsets.zero,
               decoration: BoxDecoration(
-                color: AppColor.main,
+                color: AppColor.nearlyWhite,
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,9 +85,10 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
                   CircleAvatar(
                     child: Icon(
                       Icons.person_pin,
-                      color: Colors.white,
+                      color: AppColor.main,
                       size: 44,
                     ),
+                    backgroundColor: Colors.transparent,
                   ),
                   SizedBox(width: 8),
                   Expanded(
@@ -98,13 +99,11 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
                         children: [
                           Padding(
                             padding: EdgeInsets.symmetric(
-                                horizontal: 4,
-                                vertical: 2
-                            ),
+                                horizontal: 4, vertical: 2),
                             child: Text(
                               '${user.hoVaTen}',
                               style: GoogleFonts.merriweather(
-                                color: Colors.white,
+                                color: AppColor.main,
                                 fontSize: 17,
                               ),
                               maxLines: 2,
@@ -116,7 +115,7 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
                               text: TextSpan(
                                 text: '${user.tenDangNhap}',
                                 style: GoogleFonts.roboto(
-                                  color: Colors.white,
+                                  color: AppColor.main,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w300,
                                 ),
@@ -137,9 +136,12 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
               padding: EdgeInsets.only(top: 16),
               children: List.generate(
                 drawerData.length,
-                    (int index) {
+                (int index) {
                   return ListTile(
-                    title: Text(drawerData[index].title),
+                    title: Text(
+                      drawerData[index].title,
+                      style: GoogleFonts.roboto(),
+                    ),
                     onTap: () => tapOnDrawerItem(drawerData[index].item),
                   );
                 },
@@ -182,16 +184,13 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
                   ),
                 ),
                 actions: [
-                  InkWell(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Icon(
-                        Icons.logout,
-                        color: Colors.white,
-                        size: 22,
-                      ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.logout,
+                      color: Colors.white,
+                      size: 22,
                     ),
-                    onTap: () => Utils.showAwesomeDialog(
+                    onPressed: () => Utils.showAwesomeDialog(
                       context,
                       title: 'confirm'.tr,
                       message: 'confirm_logout'.tr,
