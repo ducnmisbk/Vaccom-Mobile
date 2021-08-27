@@ -20,6 +20,26 @@ extension EmailValidator on String {
 class Utils {
   static hideKeyboard() => FocusManager.instance.primaryFocus.unfocus();
 
+  static PreferredSize gradientAppBar({AppBar appBar}) {
+    return PreferredSize(
+      preferredSize: Size.fromHeight(AppBar().preferredSize.height),
+      child: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xFF171cc2), Color(0xFFff5200)],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+            ),
+          ),
+          appBar,
+        ],
+      ),
+    );
+  }
+
   static Future<void> revokeToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove(AppConstant.accessToken);

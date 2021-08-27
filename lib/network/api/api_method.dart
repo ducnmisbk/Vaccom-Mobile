@@ -11,7 +11,7 @@ extension ApiMethod on API {
   }
 
   static String convertMapToQueryParameter(Map<String, dynamic> params) {
-    var result = List<String>();
+    List<String> result = [];
     params.forEach((key, value) {
       result.add("$key=$value");
     });
@@ -112,7 +112,7 @@ extension ApiMethod on API {
   static dynamic _processResponse(http.Response response) {
     switch (response.statusCode) {
       case 200:
-        var responseJson = json.decode(response.body.toString());
+        var responseJson = json.decode(response.body);
         logger.info(responseJson);
         return responseJson;
         break;

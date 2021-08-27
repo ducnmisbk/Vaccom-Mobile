@@ -35,6 +35,7 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
       vsync: this,
     );
 
+    // TODO: Hiển thị menu item theo tài khoản đăng nhập
     drawerData = DrawerItemData.items;
     menuList = buildMenuList();
 
@@ -46,7 +47,6 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
   }
 
   buildMenuList() {
-    // TODO: Hiển thị menu item theo tài khoản đăng nhập
     return [
       MenuItem(title: 'Menu 1', icon: Icons.book, index: MenuIndex.menu1),
       MenuItem(title: 'Menu 2', icon: Icons.extension, index: MenuIndex.menu2),
@@ -159,47 +159,33 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
       child: Scaffold(
         key: mainKey,
         drawer: drawerWidget,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(AppBar().preferredSize.height),
-          child: Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Color(0xFF171cc2), Color(0xFFff5200)],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                  ),
-                ),
+        appBar: Utils.gradientAppBar(
+          appBar: AppBar(
+            brightness: Brightness.dark,
+            backgroundColor: Colors.transparent,
+            title: Text(
+              r'Dashboard',
+              style: GoogleFonts.roboto(
+                color: AppColor.nearlyWhite,
+                fontWeight: FontWeight.w500,
+                fontSize: 15,
               ),
-              AppBar(
-                brightness: Brightness.dark,
-                backgroundColor: Colors.transparent,
-                title: Text(
-                  r'Dashboard',
-                  style: GoogleFonts.roboto(
-                    color: AppColor.nearlyWhite,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 15,
-                  ),
+            ),
+            actions: [
+              IconButton(
+                icon: Icon(
+                  Icons.logout,
+                  color: Colors.white,
+                  size: 22,
                 ),
-                actions: [
-                  IconButton(
-                    icon: Icon(
-                      Icons.logout,
-                      color: Colors.white,
-                      size: 22,
-                    ),
-                    onPressed: () => Utils.showAwesomeDialog(
-                      context,
-                      title: 'confirm'.tr,
-                      message: 'confirm_logout'.tr,
-                      isDestructive: true,
-                      dismissOnTouchOutside: true,
-                      onPressedOK: () => Utils.logout(),
-                    ),
-                  )
-                ],
+                onPressed: () => Utils.showAwesomeDialog(
+                  context,
+                  title: 'confirm'.tr,
+                  message: 'confirm_logout'.tr,
+                  isDestructive: true,
+                  dismissOnTouchOutside: true,
+                  onPressedOK: () => Utils.logout(),
+                ),
               )
             ],
           ),
