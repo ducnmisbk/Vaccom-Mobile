@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:vaccom_mobile/commons/color.dart';
 import 'package:vaccom_mobile/commons/constants.dart';
 import 'package:vaccom_mobile/commons/styles.dart';
@@ -27,6 +28,7 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
   List<DashboardItem> dashboardData = [];
   List<DrawerItemData> drawerData = [];
 
+  final _refreshCtrl = RefreshController(initialRefresh: false);
   final viewModel = MainViewModel();
 
   @override
@@ -61,6 +63,7 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
   }
 
   void getDashboardPublicData() async {
+    dashboardData.clear();
     var summary = await viewModel.getSummary();
 
     if (summary != null) {
@@ -94,7 +97,9 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
             value: dashboard.objectInjection,
           ),
         ]);
-        setState(() {});
+        setState(() {
+          _refreshCtrl.refreshCompleted();
+        });
       }
     }
   }
@@ -104,7 +109,7 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
       return SizedBox.shrink();
     }
 
-    return GridView(
+    final grid = GridView(
       padding: EdgeInsets.all(24),
       physics: BouncingScrollPhysics(),
       scrollDirection: Axis.vertical,
@@ -135,6 +140,22 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
         crossAxisSpacing: 24.0,
         childAspectRatio: 5,
       ),
+    );
+
+    return SmartRefresher(
+      enablePullDown: true,
+      enablePullUp: false,
+      header: WaterDropHeader(
+        complete: Utils.completeRefreshWidget,
+      ),
+      footer: CustomFooter(
+        builder: (BuildContext context, LoadStatus mode) {
+          return SizedBox();
+        },
+      ),
+      controller: _refreshCtrl,
+      onRefresh: getDashboardPublicData,
+      child: grid,
     );
   }
 
