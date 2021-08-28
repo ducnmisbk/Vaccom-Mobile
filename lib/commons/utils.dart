@@ -29,7 +29,7 @@ class Utils {
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Color(0xFF171cc2), Color(0xFFff5200)],
+                colors: AppConstant.gradientColor,
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
               ),
