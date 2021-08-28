@@ -43,7 +43,7 @@ extension ApiMethod on API {
 
     try {
       var response = await http.get(Uri.parse(endpoint), headers: headers);
-      var jsonData = _processResponse(response);
+      var jsonData = processResponse(response);
       return jsonData;
     } catch (e) {
       throw e;
@@ -75,7 +75,7 @@ extension ApiMethod on API {
         body: params,
         headers: headers,
       );
-      var jsonData = _processResponse(response);
+      var jsonData = processResponse(response);
       return jsonData;
     } catch (e) {
       throw e;
@@ -100,7 +100,7 @@ extension ApiMethod on API {
         headers: {'authorization': basicAuth},
       );
 
-      var responseJson = _processResponse(response);
+      var responseJson = processResponse(response);
       logger.info(responseJson);
       return responseJson;
     } catch (e) {
@@ -109,7 +109,7 @@ extension ApiMethod on API {
   }
 
   ///
-  static dynamic _processResponse(http.Response response) {
+  static dynamic processResponse(http.Response response) {
     switch (response.statusCode) {
       case 200:
         var responseJson = json.decode(response.body);
@@ -118,6 +118,26 @@ extension ApiMethod on API {
         break;
       default:
         throw FetchDataException('Lỗi kết nối: ${response.statusCode}');
+    }
+  }
+}
+
+extension Covid19 on API {
+  /// GET
+  static Future<dynamic> getData(String uri) async {
+    final isOnline = await ApiMethod.hasNetwork();
+    if (isOnline == false) {
+      throw NetworkException();
+    }
+
+    logger.info('--uri: $uri');
+
+    try {
+      var response = await http.get(Uri.parse(uri));
+      var jsonData = ApiMethod.processResponse(response);
+      return jsonData;
+    } catch (e) {
+      throw e;
     }
   }
 }
