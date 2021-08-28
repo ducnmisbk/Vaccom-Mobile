@@ -26,7 +26,7 @@
 .pub-cache/
 .pub/
 /build/
-.fvm/flutter_sdk
+.fvm/
 
 # Android related
 **/android/**/gradle-wrapper.jar
@@ -73,3 +73,14 @@
 .dart_tool/version
 .dart_tool/package_config_subset
 *.json
+
+#
+.dart_tool/package_config.json
+.dart_tool/package_config_subset
+.dart_tool/version
+.flutter-plugins-dependencies
+.fvm/flutter_sdk
+.packages
+android/local.properties
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh

@@ -161,26 +161,25 @@ class _NewInjectorPageState extends State<NewInjectorPage> {
                   onChanged: (t) => viewModel.injector.ghiChu = t,
                 ),
                 Container(
-                    height: 54,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        VacButton(
-                          title: r'Hủy',
-                          color: AppColor.error,
-                          onTap: () => Get.back(),
-                        ),
-                        SizedBox(width: 16),
-                        VacButton(
-                          title: r'Đăng ký tiêm',
-                          color: AppColor.main,
-                          icon: Icons.save,
-                          onTap: () {
-                            Toast.show(text: r'Đăng ký tiêm');
-                          },
-                        )
-                      ],
-                    )),
+                  height: 54,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      VacButton(
+                        title: r'Hủy',
+                        color: AppColor.error,
+                        onTap: () => Get.back(),
+                      ),
+                      SizedBox(width: 16),
+                      VacButton(
+                        title: r'Đăng ký tiêm',
+                        color: AppColor.main,
+                        icon: Icons.save,
+                        onTap: addInjector,
+                      )
+                    ],
+                  ),
+                ),
                 SizedBox(
                   height: MediaQuery.of(context).padding.bottom,
                 )
@@ -190,5 +189,15 @@ class _NewInjectorPageState extends State<NewInjectorPage> {
         ),
       ),
     );
+  }
+
+  /// PRIVATE METHOD
+  void addInjector() {
+    if (viewModel.invalidInjector()) {
+      Toast.show(
+        text: r'Các thông tin có dấu (*) là bắt buộc',
+      );
+      return;
+    }
   }
 }

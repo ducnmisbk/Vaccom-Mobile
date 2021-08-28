@@ -35,7 +35,7 @@ class InjectorCell extends StatelessWidget {
     var textStyle = GoogleFonts.roboto(
       fontSize: 15,
       fontWeight: FontWeight.w400,
-      color: AppColor.link,
+      color: AppColor.nearlyBlack,
     );
 
     final body = Container(
@@ -57,13 +57,28 @@ class InjectorCell extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               RichText(
-                textAlign: TextAlign.end,
                 text: TextSpan(
-                  text: r"Họ và tên: ",
+                  text: r"Họ tên: ",
                   style: subStyle,
                   children: <TextSpan>[
                     TextSpan(
                       text: '${item.hoVaTen}',
+                      style: textStyle.copyWith(
+                        color: AppColor.link,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              DashDivider(),
+              RichText(
+                text: TextSpan(
+                  text: r"Ngày sinh: ",
+                  style: subStyle,
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: '${item.ngaySinh}',
                       style: textStyle,
                     ),
                   ],
@@ -72,15 +87,50 @@ class InjectorCell extends StatelessWidget {
               DashDivider(),
               RichText(
                 text: TextSpan(
-                  text: r"CMND/CCCD:   ",
+                  text: r"CMND/CCCD: ",
                   style: subStyle,
                   children: <TextSpan>[
                     TextSpan(
                       text: '${item.cmtcccd}',
-                      style: textStyle.copyWith(
-                        color: AppColor.nearlyBlack,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: textStyle,
+                    ),
+                  ],
+                ),
+              ),
+              DashDivider(),
+              RichText(
+                text: TextSpan(
+                  text: r"Số điện thoại: ",
+                  style: subStyle,
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: '${item.soDienThoai}',
+                      style: textStyle,
+                    ),
+                  ],
+                ),
+              ),
+              DashDivider(),
+              RichText(
+                text: TextSpan(
+                  text: r"Địa chỉ: ",
+                  style: subStyle,
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: '${item.diaChiNoiO} ',
+                      style: textStyle,
+                    ),
+                    TextSpan(
+                      text: '- ${item.phuongXaTen} ',
+                      style: textStyle,
+                    ),
+                    TextSpan(
+                      text: '- ${item.quanHuyenTen} ',
+                      style: textStyle,
+                    ),
+                    TextSpan(
+                      text: '- ${item.tinhThanhTen}.',
+                      style: textStyle,
                     ),
                   ],
                 ),

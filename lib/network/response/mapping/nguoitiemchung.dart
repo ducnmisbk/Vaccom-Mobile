@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:vaccom_mobile/commons/utils.dart';
+
 class InjectorPaging {
   int total;
   List<NguoiTiemChung> data;
@@ -144,6 +147,25 @@ class NguoiTiemChung {
     "NgayDangKi": ngayDangKi,
     "TinhTrangDangKi": tinhTrangDangKi,
   };
+
+  DateTime get dateOfBirth {
+    if (ngaySinh == null) {
+      return null;
+    }
+    var date = DateUtil.convertStringToDateTime(
+      dateInString: ngaySinh,
+      format: 'dd/MM/yyyy'
+    );
+
+    if (date == null) {
+      date = DateUtil.convertStringToDateTime(
+          dateInString: ngaySinh,
+          format: r'ddMMyyyy'
+      );
+    }
+
+    return date;
+  }
 
   static List<NguoiTiemChung> listFromJson(dynamic data) =>
       List<NguoiTiemChung>.from(data.map((x) => NguoiTiemChung.fromJson(x)));
