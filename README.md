@@ -1,16 +1,35 @@
-# vaccom_mobile
+# Configuration fvm
+## 1. Install fvm
+https://fvm.app/docs/getting_started/installation
 
-A new Flutter project.
+>dart pub global activate fvm
 
-## Getting Started
+>brew tap leoafarias/fvm
+>brew install fvm
 
-This project is a starting point for a Flutter application.
+## 2. Active fvm
+>dart pub global activate fvm
 
-A few resources to get you started if this is your first Flutter project:
+## 3. Install multiple version flutter
+>fvm install 2.2.3
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+>fvm install stable
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 4. Configure Your IDE
+### Android Studio
+Tool Bar > Preferences > Languages & Frameworks -> Flutter -> SDK Path
+![Languages   Frameworks Flutter](https://user-images.githubusercontent.com/5656118/131211379-41ddc28b-4dec-4ee3-b3d8-8aee2cdb86f1.png)
+
+set path to *~/fvm/versions/2.2.3*
+
+### VSCode
+Add the following to your settings.json
+```
+{
+   "dart.flutterSdkPaths": [
+      "fvm"
+   ]
+}
+```
+## 5. Open project and run in terminal of IDE
+>fvm use 2.2.3
