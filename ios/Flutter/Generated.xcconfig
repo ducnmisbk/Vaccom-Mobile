@@ -1,8 +1,8 @@
 // This is a generated file; do not edit or check into version control.
-FLUTTER_ROOT=/Users/thanhla/fvm/versions/stable
-FLUTTER_APPLICATION_PATH=/Users/thanhla/Documents/Outsource/Vaccom-Mobile
+FLUTTER_ROOT=/Users/admin/fvm/versions/2.2.3
+FLUTTER_APPLICATION_PATH=/Users/admin/Documents/Outsources/Vac_com/Vaccom-Mobile
 COCOAPODS_PARALLEL_CODE_SIGN=true
-FLUTTER_TARGET=/Users/thanhla/Documents/Outsource/Vaccom-Mobile/lib/main.dart
+FLUTTER_TARGET=/Users/admin/Documents/Outsources/Vac_com/Vaccom-Mobile/lib/main.dart
 FLUTTER_BUILD_DIR=build
 SYMROOT=${SOURCE_ROOT}/../build/ios
 FLUTTER_BUILD_NAME=1.0.0
@@ -12,4 +12,4 @@ DART_DEFINES=Zmx1dHRlci5pbnNwZWN0b3Iuc3RydWN0dXJlZEVycm9ycz10cnVl,RkxVVFRFUl9XRU
 DART_OBFUSCATION=false
 TRACK_WIDGET_CREATION=true
 TREE_SHAKE_ICONS=false
-PACKAGE_CONFIG=/Users/thanhla/Documents/Outsource/Vaccom-Mobile/.dart_tool/package_config.json
+PACKAGE_CONFIG=/Users/admin/Documents/Outsources/Vac_com/Vaccom-Mobile/.dart_tool/package_config.json

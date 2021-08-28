@@ -14,6 +14,7 @@ export 'mock_api.dart';
 export 'remote_api.dart';
 
 part 'api_method.dart';
+
 part 'api_path.dart';
 
 enum ApiType { mock, remote }
@@ -24,4 +25,8 @@ abstract class API {
   Future<VacToken> securityToken({String username, String password});
 
   Future<User> getUser({int userId});
+
+  Future<InjectorPaging> getListNguoiTiemChung({
+    Map<String, dynamic> params,
+  });
 }

@@ -26,7 +26,7 @@ extension ApiMethod on API {
       throw NetworkException();
     }
 
-    logger.info('\n[${api.name}] GET ${api.path} - params: $params');
+    logger.info('--[${api.name}] GET ${api.path} - params: $params');
 
     var accessToken = await Utils.getAppToken();
 
@@ -58,7 +58,7 @@ extension ApiMethod on API {
       throw NetworkException();
     }
 
-    logger.info('\n[${api.name}] POST ${api.path} - params: $params');
+    logger.info('--[${api.name}] POST ${api.path} - params: $params');
 
     var accessToken = await Utils.getAppToken();
 

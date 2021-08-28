@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccom_mobile/commons/color.dart';
+import 'package:vaccom_mobile/commons/styles.dart';
 import 'package:vaccom_mobile/commons/toast.dart';
 import 'package:vaccom_mobile/commons/utils.dart';
 import 'package:vaccom_mobile/model/menu_item.dart';
 import 'package:get/get.dart';
 import 'package:vaccom_mobile/network/global.dart';
 import 'package:vaccom_mobile/router/main_key.dart';
+import 'package:vaccom_mobile/router/router.dart';
 import 'main_item_view.dart';
 
 class MainPage extends StatefulWidget {
@@ -57,10 +59,11 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
   tapOnDrawerItem(DrawerItem item) {
     mainKey.currentState.openEndDrawer();
     switch (item) {
-      case DrawerItem.checkIn:
-        Toast.show(text: item.toString());
+      case DrawerItem.duyetDanhSachDoiTuongTiemMoi:
+        Get.toNamed(GetRouter.injector);
         break;
       default:
+        Toast.show(text: item.toString());
         break;
     }
   }
@@ -73,62 +76,61 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
       child: Column(
         children: [
           SizedBox(
-            height: 145,
-            child: DrawerHeader(
-              margin: EdgeInsets.zero,
-              decoration: BoxDecoration(
-                color: AppColor.nearlyWhite,
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CircleAvatar(
-                    child: Icon(
-                      Icons.person_pin,
-                      color: AppColor.main,
-                      size: 44,
+            height: 111,
+            child: Utils.gradientAppBar(
+              child: DrawerHeader(
+                margin: EdgeInsets.zero,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CircleAvatar(
+                      child: Icon(
+                        Icons.person_pin,
+                        color: Colors.white,
+                        size: 44,
+                      ),
+                      backgroundColor: Colors.transparent,
                     ),
-                    backgroundColor: Colors.transparent,
-                  ),
-                  SizedBox(width: 8),
-                  Expanded(
-                    child: Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 4, vertical: 2),
-                            child: Text(
-                              '${user.hoVaTen}',
-                              style: GoogleFonts.merriweather(
-                                color: AppColor.main,
-                                fontSize: 17,
-                              ),
-                              maxLines: 2,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 4),
-                            child: RichText(
-                              text: TextSpan(
-                                text: '${user.tenDangNhap}',
-                                style: GoogleFonts.roboto(
-                                  color: AppColor.main,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w300,
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 4, vertical: 2),
+                              child: Text(
+                                '${user.hoVaTen}',
+                                style: GoogleFonts.merriweather(
+                                  color: Colors.white,
+                                  fontSize: 16,
                                 ),
-                                children: <TextSpan>[],
+                                maxLines: 2,
                               ),
                             ),
-                          ),
-                        ],
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 4),
+                              child: RichText(
+                                text: TextSpan(
+                                  text: '${user.tenDangNhap}',
+                                  style: GoogleFonts.openSans(
+                                    color: AppColor.nearlyWhite,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                  children: <TextSpan>[],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
+              )
             ),
           ),
           Expanded(
@@ -160,16 +162,12 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
         key: mainKey,
         drawer: drawerWidget,
         appBar: Utils.gradientAppBar(
-          appBar: AppBar(
+          child: AppBar(
             brightness: Brightness.dark,
             backgroundColor: Colors.transparent,
             title: Text(
               r'Dashboard',
-              style: GoogleFonts.roboto(
-                color: AppColor.nearlyWhite,
-                fontWeight: FontWeight.w500,
-                fontSize: 15,
-              ),
+              style: AppStyle.appBarTitle,
             ),
             actions: [
               IconButton(

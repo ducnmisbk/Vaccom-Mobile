@@ -284,6 +284,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "pull_to_refresh",
+      "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dartlang.org/pull_to_refresh-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "rxdart",
       "rootUri": "file:///Users/admin/.pub-cache/hosted/pub.dartlang.org/rxdart-0.27.1",
       "packageUri": "lib/",
@@ -494,7 +500,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-08-28T00:30:43.246490Z",
+  "generated": "2021-08-28T01:29:15.331084Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }

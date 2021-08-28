@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_logger/simple_logger.dart';
 import 'package:vaccom_mobile/commons/constants.dart';
@@ -20,9 +21,9 @@ extension EmailValidator on String {
 class Utils {
   static hideKeyboard() => FocusManager.instance.primaryFocus.unfocus();
 
-  static PreferredSize gradientAppBar({AppBar appBar}) {
+  static PreferredSize gradientAppBar({Widget child, double height}) {
     return PreferredSize(
-      preferredSize: Size.fromHeight(AppBar().preferredSize.height),
+      preferredSize: Size.fromHeight(height ?? AppBar().preferredSize.height),
       child: Stack(
         children: [
           Container(
@@ -34,7 +35,7 @@ class Utils {
               ),
             ),
           ),
-          appBar,
+          child,
         ],
       ),
     );
@@ -118,5 +119,51 @@ class Utils {
           : null,
     )..show();
   }
+
+  //
+  static Widget emptyDataWidget({String text = r'Chưa có dữ liệu'}) {
+    return Column(
+      children: <Widget>[
+        SizedBox(height: 64),
+        Center(
+          child: Text(
+            '$text',
+            textAlign: TextAlign.center,
+            style: GoogleFonts.openSans(
+              fontWeight: FontWeight.normal,
+              fontSize: 13,
+              fontStyle: FontStyle.italic,
+              color: Colors.grey,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  static String dateTimeNow() {
+    var now = DateTime.now();
+    var minute = now.minute < 10 ? '0${now.minute}' : '${now.minute}';
+    return '${now.day}/${now.month}/${now.year} ${now.hour}:$minute';
+  }
+
+  static Widget completeRefreshWidget = Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+      const Icon(
+        Icons.done,
+        color: Colors.grey,
+      ),
+      Container(
+        width: 10.0,
+      ),
+      Text(
+        r'Cập nhật lúc ' + dateTimeNow(),
+        style: GoogleFonts.openSans(
+          color: Colors.grey,
+        ),
+      )
+    ],
+  );
 }
 
