@@ -22,4 +22,8 @@ abstract class API {
   Future<VacToken> securityToken({String username, String password});
 
   Future<User> getUser({int userId});
+
+  Future<List<TinhThanh>> getCity();
+
+  Future<List<QuanHuyen>> getDistrict({int cityId});
 }

@@ -10,4 +10,5 @@ class AppColor {
   static const link = Color(0xFF1a73e8);
   static const border = Color(0xFFCECECE);
   static const error = Color(0xFFdd4d4d);
+  static const deactive = Color(0xFFDBE0E6);
 }

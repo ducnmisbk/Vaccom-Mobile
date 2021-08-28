@@ -21,4 +21,14 @@ class MockAPI implements API {
     var data = json.decode(mockUser);
     return User.fromJson(data);
   }
+
+  Future<List<TinhThanh>> getCity() async {
+    var data = json.decode(mockTinhThanh);
+    return TinhThanh.listFromJson(data);
+  }
+
+  Future<List<QuanHuyen>> getDistrict({int cityId}) async {
+    var data = json.decode(mockQuanHuyen);
+    return QuanHuyen.listFromJson(data);
+  }
 }

@@ -3,10 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccom_mobile/commons/color.dart';
 import 'package:vaccom_mobile/commons/toast.dart';
 import 'package:vaccom_mobile/commons/utils.dart';
+import 'package:vaccom_mobile/components/custom_app_bar.dart';
 import 'package:vaccom_mobile/model/menu_item.dart';
 import 'package:get/get.dart';
 import 'package:vaccom_mobile/network/global.dart';
 import 'package:vaccom_mobile/router/main_key.dart';
+import 'package:vaccom_mobile/router/router.dart';
 import 'main_item_view.dart';
 
 class MainPage extends StatefulWidget {
@@ -60,6 +62,9 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
       case DrawerItem.checkIn:
         Toast.show(text: item.toString());
         break;
+      case DrawerItem.nhapDangKyDoiTuongTiemMoi:
+        Get.toNamed(GetRouter.register_injection);
+        break;  
       default:
         break;
     }
@@ -159,50 +164,26 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
       child: Scaffold(
         key: mainKey,
         drawer: drawerWidget,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(AppBar().preferredSize.height),
-          child: Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Color(0xFF171cc2), Color(0xFFff5200)],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                  ),
-                ),
+        appBar: CustomAppBar(
+          title: r'Dashboard',
+          canBack: false,
+          actions: [
+            IconButton(
+              icon: Icon(
+                Icons.logout,
+                color: Colors.white,
+                size: 22,
               ),
-              AppBar(
-                brightness: Brightness.dark,
-                backgroundColor: Colors.transparent,
-                title: Text(
-                  r'Dashboard',
-                  style: GoogleFonts.roboto(
-                    color: AppColor.nearlyWhite,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 15,
-                  ),
-                ),
-                actions: [
-                  IconButton(
-                    icon: Icon(
-                      Icons.logout,
-                      color: Colors.white,
-                      size: 22,
-                    ),
-                    onPressed: () => Utils.showAwesomeDialog(
-                      context,
-                      title: 'confirm'.tr,
-                      message: 'confirm_logout'.tr,
-                      isDestructive: true,
-                      dismissOnTouchOutside: true,
-                      onPressedOK: () => Utils.logout(),
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),
+              onPressed: () => Utils.showAwesomeDialog(
+                context,
+                title: 'confirm'.tr,
+                message: 'confirm_logout'.tr,
+                isDestructive: true,
+                dismissOnTouchOutside: true,
+                onPressedOK: () => Utils.logout(),
+              ),
+            )
+          ],
         ),
         body: GridView(
           padding: EdgeInsets.all(24),
