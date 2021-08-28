@@ -51,9 +51,27 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
 
   buildMenuList() {
     return [
-      MenuItem(title: 'Menu 1', icon: Icons.book, index: MenuIndex.menu1),
-      MenuItem(title: 'Menu 2', icon: Icons.extension, index: MenuIndex.menu2),
-      MenuItem(title: 'Menu 3', icon: Icons.link, index: MenuIndex.menu3),
+      MenuItem(
+        title: r'Đối tượng đăng ký tiêm',
+        icon:
+            r'https://tiemchungcovid19.gov.vn/assets/portal/img/ic_register_people.svg',
+        unit: r'lượt',
+        value: r'5,795,421'
+      ),
+      MenuItem(
+          title: r'Số mũi tiêm hôm qua',
+          icon:
+          r'https://tiemchungcovid19.gov.vn/assets/portal/img/ic_injection.svg',
+          unit: r'mũi',
+          value: r'280,333'
+      ),
+      MenuItem(
+          title: r'Số mũi đã tiêm toàn quốc',
+          icon:
+          r'https://tiemchungcovid19.gov.vn/assets/portal/img/ic_injected_people.svg',
+          unit: r'mũi',
+          value: r'19,223,460'
+      ),
     ];
   }
 
@@ -207,7 +225,7 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
               );
               animationController.forward();
               return MainItemView(
-                menuItem: menuList[index],
+                item: menuList[index],
                 index: index,
                 animation: animation,
                 animationController: animationController,
@@ -216,10 +234,10 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
             },
           ),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            mainAxisSpacing: 24.0,
+            crossAxisCount: 1,
+            mainAxisSpacing: 16.0,
             crossAxisSpacing: 24.0,
-            childAspectRatio: 1,
+            childAspectRatio: 5,
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(

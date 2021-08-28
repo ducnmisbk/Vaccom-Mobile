@@ -80,7 +80,7 @@ class PagingFooterState extends State<PagingFooter> {
           IconButton(onPressed: null, icon: SizedBox()),
           IconButton(
             icon: Icon(Icons.navigate_before),
-            onPressed: () {
+            onPressed: widget.isLoading ? null : () {
               var prevPage = page - 1;
               if (prevPage >= 0) {
                 setState(() {
@@ -115,7 +115,7 @@ class PagingFooterState extends State<PagingFooter> {
           ),
           IconButton(
             icon: Icon(Icons.navigate_next),
-            onPressed: () {
+            onPressed: widget.isLoading ? null : () {
               var nextPage = page + 1;
               if (nextPage < allPages.length) {
                 setState(() {
@@ -136,8 +136,10 @@ class PagingFooterState extends State<PagingFooter> {
             style: const TextStyle(color: Colors.black87),
             underline: Divider(color: Colors.transparent),
             onChanged: (int newValue) {
-              setState(() => page = newValue);
-              widget.onPage(page);
+              if (!widget.isLoading) {
+                setState(() => page = newValue);
+                widget.onPage(page);
+              }
             },
             items: allPages.map<DropdownMenuItem<int>>((int value) {
               return DropdownMenuItem<int>(

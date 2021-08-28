@@ -35,7 +35,7 @@ class CustomInput extends StatefulWidget {
 
 class _CustomInputState extends State<CustomInput> {
   Color cursorColor = AppColor.main;
-  Color warningColor = Color(0xFFdd4d4d);
+  Color warningColor = Colors.red;
 
   final textCtrl = TextEditingController();
 
@@ -61,18 +61,20 @@ class _CustomInputState extends State<CustomInput> {
             text: TextSpan(
               text: widget.title,
               style: GoogleFonts.roboto(
-                  color: AppColor.nearlyBlack,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14),
+                color: AppColor.nearlyBlack,
+                fontWeight: FontWeight.w500,
+                fontSize: 14,
+              ),
               children: widget.isRequired
                   ? [
                       TextSpan(
                         text: ' (*)',
-                        style: GoogleFonts.roboto(
-                            color: warningColor,
-                            fontWeight: FontWeight.normal,
-                            fontStyle: FontStyle.italic,
-                            fontSize: 12),
+                        style: GoogleFonts.merriweather(
+                          color: warningColor,
+                          fontWeight: FontWeight.normal,
+                          fontStyle: FontStyle.italic,
+                          fontSize: 12,
+                        ),
                       ),
                     ]
                   : [],
@@ -121,19 +123,21 @@ class _CustomInputState extends State<CustomInput> {
                             ),
                           ),
                         ),
-                        widget.isButton ? Align(
-                          alignment: Alignment.centerRight,
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 5),
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.arrow_drop_down,
-                                color: Colors.grey,
-                              ),
-                              onPressed: null,
-                            ),
-                          ),
-                        ) : SizedBox.shrink(),
+                        widget.isButton
+                            ? Align(
+                                alignment: Alignment.centerRight,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 5),
+                                  child: IconButton(
+                                    icon: Icon(
+                                      Icons.arrow_drop_down,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: null,
+                                  ),
+                                ),
+                              )
+                            : SizedBox.shrink(),
                       ],
                     ),
                   ),
