@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccom_mobile/commons/color.dart';
-import 'package:vaccom_mobile/model/menu_item.dart';
+import 'package:vaccom_mobile/model/dashboard_item.dart';
 
 class MainItemView extends StatelessWidget {
   const MainItemView({
@@ -16,7 +16,7 @@ class MainItemView extends StatelessWidget {
   }) : super(key: key);
 
   final int index;
-  final MenuItem item;
+  final DashboardItem item;
   final VoidCallback callBack;
   final AnimationController animationController;
   final Animation<dynamic> animation;
@@ -80,7 +80,7 @@ class MainItemView extends StatelessWidget {
                                 ),
                                 RichText(
                                   text: TextSpan(
-                                    text: item.value,
+                                    text: item.valueString,
                                     style: GoogleFonts.roboto(
                                       color: AppColor.nearlyBlack,
                                       fontSize: 20,

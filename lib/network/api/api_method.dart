@@ -122,9 +122,9 @@ extension ApiMethod on API {
   }
 }
 
-extension Covid19 on API {
+extension Covid19Vaccine on API {
   /// GET
-  static Future<dynamic> getData(String uri) async {
+  static Future<dynamic> getData({String uri}) async {
     final isOnline = await ApiMethod.hasNetwork();
     if (isOnline == false) {
       throw NetworkException();
