@@ -5,6 +5,7 @@ import 'package:vaccom_mobile/commons/constants.dart';
 import 'package:vaccom_mobile/commons/styles.dart';
 import 'package:vaccom_mobile/commons/toast.dart';
 import 'package:vaccom_mobile/commons/utils.dart';
+import 'package:vaccom_mobile/components/gradient_view.dart';
 import 'package:vaccom_mobile/model/menu_item.dart';
 import 'package:get/get.dart';
 import 'package:vaccom_mobile/network/global.dart';
@@ -52,26 +53,23 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
   buildMenuList() {
     return [
       MenuItem(
-        title: r'Đối tượng đăng ký tiêm',
-        icon:
-            r'https://tiemchungcovid19.gov.vn/assets/portal/img/ic_register_people.svg',
-        unit: r'lượt',
-        value: r'5,795,421'
-      ),
+          title: r'Đối tượng đăng ký tiêm',
+          icon:
+              r'https://tiemchungcovid19.gov.vn/assets/portal/img/ic_register_people.svg',
+          unit: r'lượt',
+          value: r'5,795,421'),
       MenuItem(
           title: r'Số mũi tiêm hôm qua',
           icon:
-          r'https://tiemchungcovid19.gov.vn/assets/portal/img/ic_injection.svg',
+              r'https://tiemchungcovid19.gov.vn/assets/portal/img/ic_injection.svg',
           unit: r'mũi',
-          value: r'280,333'
-      ),
+          value: r'280,333'),
       MenuItem(
           title: r'Số mũi đã tiêm toàn quốc',
           icon:
-          r'https://tiemchungcovid19.gov.vn/assets/portal/img/ic_injected_people.svg',
+              r'https://tiemchungcovid19.gov.vn/assets/portal/img/ic_injected_people.svg',
           unit: r'mũi',
-          value: r'19,223,460'
-      ),
+          value: r'19,223,460'),
     ];
   }
 
@@ -95,32 +93,29 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
       child: Column(
         children: [
           SizedBox(
-            height: AppBar().preferredSize.height * 2,
-            child: Utils.gradientAppBar(
-                child: DrawerHeader(
-              margin: EdgeInsets.zero,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CircleAvatar(
-                    child: Icon(
-                      Icons.person_pin,
-                      color: Colors.white,
-                      size: 44,
+            height: AppBar().preferredSize.height * 2.2,
+            child: GradientView(
+              child: DrawerHeader(
+                margin: EdgeInsets.zero,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CircleAvatar(
+                      child: Icon(
+                        Icons.person_pin,
+                        color: Colors.white,
+                        size: 44,
+                      ),
+                      backgroundColor: Colors.transparent,
                     ),
-                    backgroundColor: Colors.transparent,
-                  ),
-                  SizedBox(width: 8),
-                  Expanded(
-                    child: Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 4, vertical: 2),
-                            child: Text(
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
                               '${user.hoVaTen}',
                               style: GoogleFonts.merriweather(
                                 color: Colors.white,
@@ -128,10 +123,7 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
                               ),
                               maxLines: 1,
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 4),
-                            child: RichText(
+                            RichText(
                               text: TextSpan(
                                 text: '${user.tenDangNhap}',
                                 style: GoogleFonts.openSans(
@@ -142,14 +134,14 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
                                 children: <TextSpan>[],
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            )),
+            ),
           ),
           Expanded(
             child: ListView(
