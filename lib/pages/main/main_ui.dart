@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccom_mobile/commons/color.dart';
+import 'package:vaccom_mobile/commons/constants.dart';
 import 'package:vaccom_mobile/commons/styles.dart';
 import 'package:vaccom_mobile/commons/toast.dart';
 import 'package:vaccom_mobile/commons/utils.dart';
@@ -76,62 +77,61 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
       child: Column(
         children: [
           SizedBox(
-            height: 111,
+            height: AppBar().preferredSize.height * 2,
             child: Utils.gradientAppBar(
-              child: DrawerHeader(
-                margin: EdgeInsets.zero,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CircleAvatar(
-                      child: Icon(
-                        Icons.person_pin,
-                        color: Colors.white,
-                        size: 44,
-                      ),
-                      backgroundColor: Colors.transparent,
+                child: DrawerHeader(
+              margin: EdgeInsets.zero,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CircleAvatar(
+                    child: Icon(
+                      Icons.person_pin,
+                      color: Colors.white,
+                      size: 44,
                     ),
-                    SizedBox(width: 8),
-                    Expanded(
-                      child: Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 4, vertical: 2),
-                              child: Text(
-                                '${user.hoVaTen}',
-                                style: GoogleFonts.merriweather(
-                                  color: Colors.white,
-                                  fontSize: 16,
+                    backgroundColor: Colors.transparent,
+                  ),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 4, vertical: 2),
+                            child: Text(
+                              '${user.hoVaTen}',
+                              style: GoogleFonts.merriweather(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
+                              maxLines: 1,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 4),
+                            child: RichText(
+                              text: TextSpan(
+                                text: '${user.tenDangNhap}',
+                                style: GoogleFonts.openSans(
+                                  color: AppColor.nearlyWhite,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w300,
                                 ),
-                                maxLines: 2,
+                                children: <TextSpan>[],
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 4),
-                              child: RichText(
-                                text: TextSpan(
-                                  text: '${user.tenDangNhap}',
-                                  style: GoogleFonts.openSans(
-                                    color: AppColor.nearlyWhite,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w300,
-                                  ),
-                                  children: <TextSpan>[],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              )
-            ),
+                  ),
+                ],
+              ),
+            )),
           ),
           Expanded(
             child: ListView(
@@ -140,7 +140,7 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
                   context: context,
                   tiles: List.generate(
                     drawerData.length,
-                        (int index) {
+                    (int index) {
                       return ListTile(
                         title: Text(
                           drawerData[index].title,
@@ -149,8 +149,7 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
                         onTap: () => tapOnDrawerItem(drawerData[index].item),
                       );
                     },
-                  )
-              ).toList(),
+                  )).toList(),
             ),
           ),
         ],
@@ -227,11 +226,11 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              label: r'Checkin y tế',
+              label: r'Checkin',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.history),
-              label: r'Lịch sử tiêm chủng',
+              label: r'Lịch sử tiêm',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.qr_code),
@@ -246,6 +245,21 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
           unselectedItemColor: Colors.grey,
           selectedItemColor: AppColor.main,
           onTap: _onItemTapped,
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: Container(
+            width: 60,
+            height: 60,
+            child: Icon(
+              Icons.add,
+              size: 30,
+            ),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: LinearGradient(colors: AppConstant.gradientColor),
+            ),
+          ),
+          onPressed: () => Get.toNamed(GetRouter.newInjector),
         ),
       ),
     );
