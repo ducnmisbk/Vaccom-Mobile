@@ -1,5 +1,17 @@
-class NguoiDangKy {
-  NguoiDangKy({
+class InjectorPaging {
+  int total;
+  List<NguoiTiemChung> data;
+
+  InjectorPaging({this.total, this.data});
+
+  factory InjectorPaging.fromJson(Map<String, dynamic> json) => InjectorPaging(
+    total: json['total'],
+    data: NguoiTiemChung.listFromJson(json['data']),
+  );
+}
+
+class NguoiTiemChung {
+  NguoiTiemChung({
     this.id,
     this.hoVaTen,
     this.ngaySinh,
@@ -69,7 +81,7 @@ class NguoiDangKy {
   List<dynamic> muiTiemChung;
   List<dynamic> phieuHenTiem;
 
-  factory NguoiDangKy.fromJson(Map<String, dynamic> json) => NguoiDangKy(
+  factory NguoiTiemChung.fromJson(Map<String, dynamic> json) => NguoiTiemChung(
     id: json["id"],
     hoVaTen: json["hoVaTen"],
     ngaySinh: json["ngaySinh"],
@@ -104,4 +116,7 @@ class NguoiDangKy {
     muiTiemChung: List<dynamic>.from(json["muiTiemChung"].map((x) => x)),
     phieuHenTiem: List<dynamic>.from(json["phieuHenTiem"].map((x) => x)),
   );
+
+  static List<NguoiTiemChung> listFromJson(dynamic data) =>
+      List<NguoiTiemChung>.from(data.map((x) => NguoiTiemChung.fromJson(x)));
 }
