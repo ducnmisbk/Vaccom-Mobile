@@ -93,25 +93,18 @@ class _TextBoxState extends State<TextBox> {
                       ),
                       borderRadius: BorderRadius.circular(4),
                     ),
-                    child: Row(
-                      children: [
-                        SizedBox(width: 15),
-                        Expanded(
-                          child: TextFormField(
-                            controller: textCtrl,
-                            style: widget.style ?? GoogleFonts.roboto(),
-                            maxLines: null,
-                            maxLength: 1000,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.only(bottom: 8),
-                              counter: SizedBox.shrink(),
-                            ),
-                            cursorColor: cursorColor,
-                            onChanged: onChanged,
-                          ),
-                        ),
-                      ],
+                    child: TextFormField(
+                      controller: textCtrl,
+                      style: widget.style ?? GoogleFonts.roboto(),
+                      maxLines: null,
+                      maxLength: 1000,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.fromLTRB(8, 0, 8, 8),
+                        counter: SizedBox.shrink(),
+                      ),
+                      cursorColor: cursorColor,
+                      onChanged: onChanged,
                     ),
                   ),
                 ],

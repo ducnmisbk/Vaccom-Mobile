@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:vaccom_mobile/commons/color.dart';
 import 'package:vaccom_mobile/commons/toast.dart';
 import 'package:vaccom_mobile/components/base_scaffold.dart';
 import 'package:vaccom_mobile/components/custom_input.dart';
 import 'package:vaccom_mobile/components/text_box.dart';
+import 'package:vaccom_mobile/components/vac_button.dart';
 import 'package:vaccom_mobile/pages/injector/register/new_injector_vm.dart';
 
 /// Đăng ký tiêm mới
@@ -157,6 +160,27 @@ class _NewInjectorPageState extends State<NewInjectorPage> {
                   hintText: r'',
                   onChanged: (t) => viewModel.injector.ghiChu = t,
                 ),
+                Container(
+                    height: 54,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        VacButton(
+                          title: r'Hủy',
+                          color: AppColor.error,
+                          onTap: () => Get.back(),
+                        ),
+                        SizedBox(width: 16),
+                        VacButton(
+                          title: r'Đăng ký tiêm',
+                          color: AppColor.main,
+                          icon: Icons.save,
+                          onTap: () {
+                            Toast.show(text: r'Đăng ký tiêm');
+                          },
+                        )
+                      ],
+                    )),
                 SizedBox(
                   height: MediaQuery.of(context).padding.bottom,
                 )
