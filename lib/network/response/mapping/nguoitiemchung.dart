@@ -1,5 +1,17 @@
-class NguoiDangKy {
-  NguoiDangKy({
+class InjectorPaging {
+  int total;
+  List<NguoiTiemChung> data;
+
+  InjectorPaging({this.total, this.data});
+
+  factory InjectorPaging.fromJson(Map<String, dynamic> json) => InjectorPaging(
+    total: json['total'],
+    data: NguoiTiemChung.listFromJson(json['data']),
+  );
+}
+
+class NguoiTiemChung {
+  NguoiTiemChung({
     this.id,
     this.hoVaTen,
     this.ngaySinh,
@@ -41,20 +53,16 @@ class NguoiDangKy {
   int gioiTinh;
   String cmtcccd;
   int nhomDoiTuong;
-  String donViCongTac;
+  String donViCongTac, ngheNghiep;
   String soDienThoai;
   String email;
-  String soTheBhyt;
+  String soTheBhyt, maSoBHXH;
   String diaChiNoiO;
-  String tinhThanhMa;
-  String tinhThanhTen;
-  String quanHuyenMa;
-  String quanHuyenTen;
-  String phuongXaMa;
-  String phuongXaTen;
+  String tinhThanhMa, tinhThanhTen;
+  String quanHuyenMa, quanHuyenTen;
+  String phuongXaMa, phuongXaTen;
   int diaBanCoSoId;
-  String coSoYTeMa;
-  String coSoYTeTen;
+  String coSoYTeMa, coSoYTeTen;
   String danTocMa;
   String quocTichMa;
   String tienSuDiUng;
@@ -69,7 +77,7 @@ class NguoiDangKy {
   List<dynamic> muiTiemChung;
   List<dynamic> phieuHenTiem;
 
-  factory NguoiDangKy.fromJson(Map<String, dynamic> json) => NguoiDangKy(
+  factory NguoiTiemChung.fromJson(Map<String, dynamic> json) => NguoiTiemChung(
     id: json["id"],
     hoVaTen: json["hoVaTen"],
     ngaySinh: json["ngaySinh"],
@@ -104,4 +112,39 @@ class NguoiDangKy {
     muiTiemChung: List<dynamic>.from(json["muiTiemChung"].map((x) => x)),
     phieuHenTiem: List<dynamic>.from(json["phieuHenTiem"].map((x) => x)),
   );
+
+  Map<String, dynamic> params() => {
+    "HoVaTen": hoVaTen,
+    "NgaySinh": ngaySinh,
+    "GioiTinh": gioiTinh,
+    "CMTCCCD": cmtcccd,
+    "NgheNghiep": ngheNghiep,
+    "NhomDoiTuong": nhomDoiTuong,
+    "DonViCongTac": donViCongTac,
+    "SoDienThoai": soDienThoai,
+    "Email": email,
+    "MaSoBHXH": maSoBHXH,
+    "SoTheBHYT": soTheBhyt,
+    "DiaChiNoiO": diaChiNoiO,
+    "TinhThanh_Ma": tinhThanhMa,
+    "TinhThanh_Ten": tinhThanhTen,
+    "QuanHuyen_Ma": quanHuyenMa,
+    "QuanHuyen_Ten": quanHuyenTen,
+    "PhuongXa_Ma": phuongXaMa,
+    "PhuongXa_Ten": phuongXaTen,
+    "DiaBanCoSo_ID": diaBanCoSoId,
+    "CoSoYTe_Ma": coSoYTeMa,
+    "CoSoYTe_Ten": coSoYTeTen,
+    "DanToc_Ma": danTocMa,
+    "QuocTich_Ma": quocTichMa,
+    "TienSuDiUng": tienSuDiUng,
+    "CacBenhLyDangMac": cacBenhLyDangMac,
+    "CacThuocDangDung": cacThuocDangDung,
+    "GhiChu": ghiChu,
+    "NgayDangKi": ngayDangKi,
+    "TinhTrangDangKi": tinhTrangDangKi,
+  };
+
+  static List<NguoiTiemChung> listFromJson(dynamic data) =>
+      List<NguoiTiemChung>.from(data.map((x) => NguoiTiemChung.fromJson(x)));
 }

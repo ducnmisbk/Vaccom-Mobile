@@ -43,6 +43,17 @@ class RemoteAPI implements API {
     }
   }
 
+  Future<InjectorPaging> getListNguoiTiemChung({
+    Map<String, dynamic> params,
+  }) async {
+    try {
+      var data = await ApiMethod.getData(ApiPath.getListNguoiTiemChung, params);
+      return InjectorPaging.fromJson(data);
+    } catch (e) {
+      throw e;
+    }
+  }
+
   Future<List<QuanHuyen>> getDistrict({int cityId}) async {
     final apiPath = ApiPath.getDistrict(cityId);
     final Map<String, String> param = {};
