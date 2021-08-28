@@ -2,7 +2,7 @@
 // cmtcccd=&nhomdoituong=&ngaydangki=&hovaten=&diabancosoid=
 // &cosoytema=&tinhtrangdangky=0&kiemtratrung=&page=0&size=50
 
-const mockDanhSachDangKy = r'''{
+const mockNguoiTiemChung = r'''{
     "total": 229,
     "data":
     [
