@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccom_mobile/commons/color.dart';
-import 'package:vaccom_mobile/model/menu_item.dart';
+import 'package:vaccom_mobile/commons/utils.dart';
+import 'package:vaccom_mobile/model/dashboard_item.dart';
 
 class MainItemView extends StatelessWidget {
   const MainItemView({
     Key key,
-    this.menuItem,
+    this.item,
     this.index,
     this.animationController,
     this.animation,
@@ -14,13 +15,14 @@ class MainItemView extends StatelessWidget {
   }) : super(key: key);
 
   final int index;
-  final MenuItem menuItem;
+  final DashboardItem item;
   final VoidCallback callBack;
   final AnimationController animationController;
   final Animation<dynamic> animation;
 
   @override
   Widget build(BuildContext context) {
+
     return AnimatedBuilder(
       animation: animationController,
       builder: (BuildContext context, Widget child) {
@@ -47,23 +49,51 @@ class MainItemView extends StatelessWidget {
                   child: Stack(
                     alignment: AlignmentDirectional.center,
                     children: <Widget>[
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
+                          SizedBox(width: 10),
                           SizedBox(
-                            child: Icon(
-                              menuItem.icon,
-                              size: 50,
-                              color: AppColor.main,
-                            ),
+                            height: 30,
+                            child: Utils.getSvgItem(item.icon),
                           ),
-                          SizedBox(height: 5),
-                          Text(
-                            menuItem.title,
-                            style: GoogleFonts.openSans(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 15,
-                                color: AppColor.main),
+                          SizedBox(width: 8),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  item.title,
+                                  style: GoogleFonts.openSans(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15,
+                                    color: AppColor.nearlyBlack,
+                                  ),
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                    text: item.valueString,
+                                    style: GoogleFonts.roboto(
+                                      color: AppColor.nearlyBlack,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text: ' (${item.unit})',
+                                        style: TextStyle(
+                                          fontStyle: FontStyle.italic,
+                                          fontWeight: FontWeight.w200,
+                                          color: AppColor.nearlyBlack,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ],
                       ),

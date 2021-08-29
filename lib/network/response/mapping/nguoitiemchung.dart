@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:vaccom_mobile/commons/utils.dart';
+
 class InjectorPaging {
   int total;
   List<NguoiTiemChung> data;
@@ -53,20 +56,16 @@ class NguoiTiemChung {
   int gioiTinh;
   String cmtcccd;
   int nhomDoiTuong;
-  String donViCongTac;
+  String donViCongTac, ngheNghiep;
   String soDienThoai;
   String email;
-  String soTheBhyt;
+  String soTheBhyt, maSoBHXH;
   String diaChiNoiO;
-  String tinhThanhMa;
-  String tinhThanhTen;
-  String quanHuyenMa;
-  String quanHuyenTen;
-  String phuongXaMa;
-  String phuongXaTen;
+  String tinhThanhMa, tinhThanhTen;
+  String quanHuyenMa, quanHuyenTen;
+  String phuongXaMa, phuongXaTen;
   int diaBanCoSoId;
-  String coSoYTeMa;
-  String coSoYTeTen;
+  String coSoYTeMa, coSoYTeTen;
   String danTocMa;
   String quocTichMa;
   String tienSuDiUng;
@@ -116,6 +115,57 @@ class NguoiTiemChung {
     muiTiemChung: List<dynamic>.from(json["muiTiemChung"].map((x) => x)),
     phieuHenTiem: List<dynamic>.from(json["phieuHenTiem"].map((x) => x)),
   );
+
+  Map<String, dynamic> params() => {
+    "HoVaTen": hoVaTen,
+    "NgaySinh": ngaySinh,
+    "GioiTinh": gioiTinh,
+    "CMTCCCD": cmtcccd,
+    "NgheNghiep": ngheNghiep,
+    "NhomDoiTuong": nhomDoiTuong,
+    "DonViCongTac": donViCongTac,
+    "SoDienThoai": soDienThoai,
+    "Email": email,
+    "MaSoBHXH": maSoBHXH,
+    "SoTheBHYT": soTheBhyt,
+    "DiaChiNoiO": diaChiNoiO,
+    "TinhThanh_Ma": tinhThanhMa,
+    "TinhThanh_Ten": tinhThanhTen,
+    "QuanHuyen_Ma": quanHuyenMa,
+    "QuanHuyen_Ten": quanHuyenTen,
+    "PhuongXa_Ma": phuongXaMa,
+    "PhuongXa_Ten": phuongXaTen,
+    "DiaBanCoSo_ID": diaBanCoSoId,
+    "CoSoYTe_Ma": coSoYTeMa,
+    "CoSoYTe_Ten": coSoYTeTen,
+    "DanToc_Ma": danTocMa,
+    "QuocTich_Ma": quocTichMa,
+    "TienSuDiUng": tienSuDiUng,
+    "CacBenhLyDangMac": cacBenhLyDangMac,
+    "CacThuocDangDung": cacThuocDangDung,
+    "GhiChu": ghiChu,
+    "NgayDangKi": ngayDangKi,
+    "TinhTrangDangKi": tinhTrangDangKi,
+  };
+
+  DateTime get dateOfBirth {
+    if (ngaySinh == null) {
+      return null;
+    }
+    var date = DateUtil.convertStringToDateTime(
+      dateInString: ngaySinh,
+      format: 'dd/MM/yyyy'
+    );
+
+    if (date == null) {
+      date = DateUtil.convertStringToDateTime(
+          dateInString: ngaySinh,
+          format: r'ddMMyyyy'
+      );
+    }
+
+    return date;
+  }
 
   static List<NguoiTiemChung> listFromJson(dynamic data) =>
       List<NguoiTiemChung>.from(data.map((x) => NguoiTiemChung.fromJson(x)));
