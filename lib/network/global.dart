@@ -1,9 +1,10 @@
 import 'package:rxdart/rxdart.dart';
+import 'package:vaccom_mobile/model/server_info.dart';
 
 import 'response/mapping/user.dart';
 
 class Global {
-  static String _schema = 'https://';
+  static String _schema = 'https';
   static String _baseUrl = r'thachban.vaccom.vn:8080/rest/v1/';
 
   Global._();
@@ -12,12 +13,13 @@ class Global {
 
   String get authority => _baseUrl;
 
-  setBaseUrl(String url) {
-    _baseUrl = url;
+  setBaseUrl(ServerInfo info) {
+    _baseUrl = info.baseUrl;
+    _schema = info.protocol;
   }
 
   String endpoint(String path) {
-    return _schema + _baseUrl + (path.startsWith('/') ? path : ('/$path'));
+    return _schema + '://' + _baseUrl + (path.startsWith('/') ? path : ('/$path'));
   }
 
   String deviceToken = '';

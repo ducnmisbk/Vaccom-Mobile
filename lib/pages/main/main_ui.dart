@@ -221,19 +221,20 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
             child: ListView(
               padding: EdgeInsets.symmetric(vertical: 8),
               children: ListTile.divideTiles(
-                  context: context,
-                  tiles: List.generate(
-                    drawerData.length,
-                    (int index) {
-                      return ListTile(
-                        title: Text(
-                          drawerData[index].title,
-                          style: GoogleFonts.roboto(),
-                        ),
-                        onTap: () => tapOnDrawerItem(drawerData[index].item),
-                      );
-                    },
-                  )).toList(),
+                context: context,
+                tiles: List.generate(
+                  drawerData.length,
+                  (int index) {
+                    return ListTile(
+                      title: Text(
+                        drawerData[index].title,
+                        style: GoogleFonts.roboto(),
+                      ),
+                      onTap: () => tapOnDrawerItem(drawerData[index].item),
+                    );
+                  },
+                ),
+              ).toList(),
             ),
           ),
         ],

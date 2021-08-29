@@ -48,8 +48,9 @@ class _LoginPage extends State<LoginPage> {
     viewModel.login().then((value) {
       Utils.saveToken(value);
       getUser(value.userId);
-    }).catchError((e) =>
-        Toast.show(text: r'Tên đăng nhập hoặc mật khẩu không chính xác'));
+    }).catchError(
+      (e) => Toast.show(text: r'Tên đăng nhập hoặc mật khẩu không đúng'),
+    );
   }
 
   void getUser(int id) {
@@ -68,7 +69,7 @@ class _LoginPage extends State<LoginPage> {
     Toast.showLoading();
     await Future.delayed(Duration(seconds: 1));
     Toast.dismiss();
-    return [ServerInfo.vaccom];
+    return ServerInfo.all;
   }
 
   void selectServerInfo() async {
@@ -86,38 +87,29 @@ class _LoginPage extends State<LoginPage> {
               color: AppColor.main,
             ),
           ),
-          children: list.map((item) {
-            return Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              margin: const EdgeInsets.symmetric(vertical: 8),
-              child: ElevatedButton(
-                onPressed: () => Navigator.pop(ctx, item),
-                child: Container(
-                  margin: const EdgeInsets.all(8.0),
-                  child: RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      text: '${item.title ?? ''}',
-                      style: GoogleFonts.nunitoSans(
-                        color: AppColor.nearlyBlack,
-                      ),
-                      children: <TextSpan>[],
-                    ),
+          children: ListTile.divideTiles(
+            context: context,
+            tiles: List.generate(
+              list.length,
+              (int index) {
+                final item = list[index];
+                return ListTile(
+                  title: Text(
+                    item.title,
+                    style: GoogleFonts.roboto(),
                   ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.grey.shade200,
-                ),
-              ),
-            );
-          }).toList(),
+                  onTap: () => Navigator.pop(ctx, item),
+                );
+              },
+            ),
+          ).toList(),
         );
       },
     );
 
     if (server != null && server.title != serverInfo.title) {
       setState(() => serverInfo = server);
-      Global.shared.setBaseUrl(server.baseUrl);
+      Global.shared.setBaseUrl(server);
     }
   }
 
