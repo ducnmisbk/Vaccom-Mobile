@@ -277,6 +277,7 @@ class _LoginPage extends State<LoginPage> {
             children: [
               Container(
                 height: Get.height,
+                width: Get.width,
                 child: Image.asset(
                   'assets/images/bg_active.png',
                   fit: BoxFit.cover,

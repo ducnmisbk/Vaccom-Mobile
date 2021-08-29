@@ -131,13 +131,25 @@ extension Covid19Vaccine on API {
     }
 
     logger.info('--uri: $uri');
+    HttpClient client = HttpClient()
+      ..badCertificateCallback =
+          ((X509Certificate cert, String host, int port) => true);
 
     try {
-      var response = await http.get(Uri.parse(uri));
-      var jsonData = ApiMethod.processResponse(response);
-      return jsonData;
+      final request = await client.getUrl(Uri.parse(uri));
+      final response = await request.close();
+
+      String reply = await response.transform(utf8.decoder).join();
+
+      if (response.statusCode != 200) {
+        throw FetchDataException('Lỗi kết nối: ${response.statusCode}');
+      }
+
+      return json.decode(reply);
+
     } catch (e) {
-      throw e;
+      logger.info(e.toString());
+      throw FetchDataException('Lỗi kết nối');
     }
   }
 }

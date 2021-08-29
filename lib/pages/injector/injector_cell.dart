@@ -38,6 +38,21 @@ class InjectorCell extends StatelessWidget {
       color: AppColor.nearlyBlack,
     );
 
+    Widget richText({String title, String value, TextStyle style}) {
+      return RichText(
+        text: TextSpan(
+          text: title,
+          style: subStyle,
+          children: <TextSpan>[
+            TextSpan(
+              text: '${value ?? ''}',
+              style: style ?? textStyle,
+            ),
+          ],
+        ),
+      );
+    }
+
     final body = Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -56,84 +71,34 @@ class InjectorCell extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              RichText(
-                text: TextSpan(
-                  text: r"Họ tên: ",
-                  style: subStyle,
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: '${item.hoVaTen}',
-                      style: textStyle.copyWith(
-                        color: AppColor.link,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
+              richText(
+                title: r'Họ tên',
+                value: item.hoVaTen,
+                style: textStyle.copyWith(
+                  color: AppColor.link,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               DashDivider(),
-              RichText(
-                text: TextSpan(
-                  text: r"Ngày sinh: ",
-                  style: subStyle,
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: '${item.ngaySinh}',
-                      style: textStyle,
-                    ),
-                  ],
-                ),
+              richText(
+                title: r'Ngày sinh',
+                value: item.ngaySinh,
               ),
               DashDivider(),
-              RichText(
-                text: TextSpan(
-                  text: r"CMND/CCCD: ",
-                  style: subStyle,
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: '${item.cmtcccd}',
-                      style: textStyle,
-                    ),
-                  ],
-                ),
+              richText(
+                title: r"CMND/CCCD: ",
+                value: item.cmtcccd,
               ),
               DashDivider(),
-              RichText(
-                text: TextSpan(
-                  text: r"Số điện thoại: ",
-                  style: subStyle,
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: '${item.soDienThoai}',
-                      style: textStyle,
-                    ),
-                  ],
-                ),
+              richText(
+                title: r"Số điện thoại: ",
+                value: item.soDienThoai,
               ),
               DashDivider(),
-              RichText(
-                text: TextSpan(
-                  text: r"Địa chỉ: ",
-                  style: subStyle,
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: '${item.diaChiNoiO} ',
-                      style: textStyle,
-                    ),
-                    TextSpan(
-                      text: '- ${item.phuongXaTen} ',
-                      style: textStyle,
-                    ),
-                    TextSpan(
-                      text: '- ${item.quanHuyenTen} ',
-                      style: textStyle,
-                    ),
-                    TextSpan(
-                      text: '- ${item.tinhThanhTen}.',
-                      style: textStyle,
-                    ),
-                  ],
-                ),
+              richText(
+                title: r"Địa chỉ: ",
+                value: item.diaChiNoiO +
+                    ' - ${item.phuongXaTen} - ${item.quanHuyenTen} - ${item.tinhThanhTen}.',
               ),
               DashDivider(),
               Row(
@@ -150,14 +115,16 @@ class InjectorCell extends StatelessWidget {
                     onTap: () => action(IAction.delete, item),
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(8, 6, 8, 4),
-                      child: Icon(Icons.delete_forever, color: Colors.redAccent, size: 18),
+                      child: Icon(Icons.delete_forever,
+                          color: Colors.redAccent, size: 18),
                     ),
                   ),
                   InkWell(
                     onTap: () => action(IAction.approved, item),
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(8, 6, 8, 4),
-                      child: Icon(Icons.addchart, color: Colors.blueAccent, size: 18),
+                      child: Icon(Icons.addchart,
+                          color: Colors.blueAccent, size: 18),
                     ),
                   )
                 ],

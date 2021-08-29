@@ -6,7 +6,6 @@ import 'package:vaccom_mobile/commons/constants.dart';
 import 'package:vaccom_mobile/commons/styles.dart';
 import 'package:vaccom_mobile/commons/toast.dart';
 import 'package:vaccom_mobile/commons/utils.dart';
-import 'package:vaccom_mobile/components/custom_app_bar.dart';
 import 'package:vaccom_mobile/components/gradient_view.dart';
 import 'package:vaccom_mobile/model/dashboard_item.dart';
 import 'package:get/get.dart';
@@ -59,7 +58,7 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
         break;
       case DrawerItem.nhapDangKyDoiTuongTiemMoi:
         Get.toNamed(GetRouter.register_injection);
-        break;  
+        break;
       default:
         Toast.show(text: item.toString());
         break;
@@ -74,8 +73,7 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
       dashboardData.add(
         DashboardItem(
           title: r'Đối tượng đăng ký tiêm',
-          icon:
-              r'https://tiemchungcovid19.gov.vn/assets/portal/img/ic_register_people.svg',
+          icon: 'assets/svg/ic_register_people.svg',
           unit: r'lượt',
           value: summary.totalVaccinationRegistration,
         ),
@@ -88,15 +86,13 @@ class _MainPage extends State<MainPage> with TickerProviderStateMixin {
         dashboardData.addAll([
           DashboardItem(
             title: r'Số mũi tiêm hôm qua',
-            icon:
-                r'https://tiemchungcovid19.gov.vn/assets/portal/img/ic_injection.svg',
+            icon: 'assets/svg/ic_injection.svg',
             unit: r'mũi',
             value: dashboard.totalPopulation,
           ),
           DashboardItem(
             title: r'Số mũi đã tiêm toàn quốc',
-            icon:
-                r'https://tiemchungcovid19.gov.vn/assets/portal/img/ic_injected_people.svg',
+            icon: 'assets/svg/ic_injected_people.svg',
             unit: r'mũi',
             value: dashboard.objectInjection,
           ),

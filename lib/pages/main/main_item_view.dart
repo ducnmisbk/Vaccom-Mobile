@@ -1,8 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccom_mobile/commons/color.dart';
+import 'package:vaccom_mobile/commons/utils.dart';
 import 'package:vaccom_mobile/model/dashboard_item.dart';
 
 class MainItemView extends StatelessWidget {
@@ -23,7 +22,6 @@ class MainItemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isSvgLink = item.icon.contains('.svg');
 
     return AnimatedBuilder(
       animation: animationController,
@@ -57,12 +55,7 @@ class MainItemView extends StatelessWidget {
                           SizedBox(width: 10),
                           SizedBox(
                             height: 30,
-                            child: isSvgLink
-                                ? SvgPicture.network(item.icon)
-                                : CachedNetworkImage(
-                                    imageUrl: item.icon,
-                                    errorWidget: (_, e, o) => SizedBox.shrink(),
-                                  ),
+                            child: Utils.getSvgItem(item.icon),
                           ),
                           SizedBox(width: 8),
                           Expanded(
