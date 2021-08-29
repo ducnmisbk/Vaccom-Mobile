@@ -79,6 +79,13 @@ class NguoiTiemChung {
   List<dynamic> muiTiemChung;
   List<dynamic> phieuHenTiem;
 
+  bool get isDuplicate {
+    if (kiemTraTrung == null) {
+      return false;
+    }
+    return kiemTraTrung == 2;
+  }
+
   factory NguoiTiemChung.fromJson(Map<String, dynamic> json) => NguoiTiemChung(
     id: json["id"],
     hoVaTen: json["hoVaTen"],

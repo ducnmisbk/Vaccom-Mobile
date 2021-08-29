@@ -44,6 +44,7 @@ class _InjectorPageState extends State<InjectorPage>
     viewModel.injectorsStream.listen((list) {
       _refreshCtrl.refreshCompleted();
       _isPageLoading = false;
+      Toast.dismiss();
       if (isFirstLoading) {
         isFirstLoading = false;
       }
@@ -69,7 +70,9 @@ class _InjectorPageState extends State<InjectorPage>
     viewModel.getInjectors(param: searchQuery);
   }
 
-  void reloadStock({bool pageLoading = true}) async {
+  void reloadPageData({bool pageLoading = true}) async {
+    setState(() => dataArray.clear());
+    Toast.showLoading();
     viewModel.getInjectors(param: searchQuery);
     if (pageLoading) {
       setPageLoading();
@@ -142,7 +145,9 @@ class _InjectorPageState extends State<InjectorPage>
                             );
                           },
                         )
-                      : Utils.emptyDataWidget(),
+                      : isFirstLoading
+                          ? Utils.emptyDataWidget()
+                          : SizedBox.shrink(),
                 ),
               ),
             ),
@@ -151,19 +156,19 @@ class _InjectorPageState extends State<InjectorPage>
               numberOfPage: numberOfPage,
               onNext: () {
                 searchQuery.page += 1;
-                reloadStock();
+                reloadPageData();
               },
               onPrevious: () {
                 searchQuery.page -= 1;
-                reloadStock();
+                reloadPageData();
               },
               onPage: (page) {
                 searchQuery.page = page;
-                reloadStock();
+                reloadPageData();
               },
               onSize: (size) {
                 searchQuery.size = size;
-                reloadStock();
+                reloadPageData();
               },
             ),
             SizedBox(height: MediaQuery.of(context).padding.bottom),
@@ -181,6 +186,6 @@ class _InjectorPageState extends State<InjectorPage>
   /// PRIVATE METHOD
 
   Future<Null> _refresh() async {
-    reloadStock(pageLoading: false);
+    reloadPageData(pageLoading: false);
   }
 }

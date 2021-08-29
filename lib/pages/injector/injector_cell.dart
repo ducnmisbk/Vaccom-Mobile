@@ -71,18 +71,27 @@ class InjectorCell extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              richText(
-                title: r'Họ tên: ',
-                value: item.hoVaTen,
-                style: textStyle.copyWith(
-                  color: AppColor.link,
-                  fontWeight: FontWeight.w500,
+              Container(
+                color: item.isDuplicate ? Colors.yellow : null,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    richText(
+                      title: r'Họ tên: ',
+                      value: item.hoVaTen,
+                      style: textStyle.copyWith(
+                        color: AppColor.link,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    DashDivider(),
+                    richText(
+                      title: r'Ngày sinh: ',
+                      value: item.ngaySinh,
+                    ),
+                  ],
                 ),
-              ),
-              DashDivider(),
-              richText(
-                title: r'Ngày sinh: ',
-                value: item.ngaySinh,
               ),
               DashDivider(),
               richText(

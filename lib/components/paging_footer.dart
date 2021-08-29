@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 // import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:loading_indicator/loading_indicator.dart';
 
 class PagingFooter extends StatefulWidget {
   final Function(int) onPage;
@@ -92,7 +91,8 @@ class PagingFooterState extends State<PagingFooter> {
           ),
           Stack(
             children: [
-              CircleAvatar(
+              ElevatedButton(
+                onPressed: () {},
                 child: Text(
                   '${page + 1}/${widget.numberOfPage}',
                   style: TextStyle(
@@ -101,16 +101,16 @@ class PagingFooterState extends State<PagingFooter> {
                   ),
                 ),
               ),
-              widget.isLoading
-                  ? SizedBox(
-                      width: 40,
-                      height: 40,
-                      child: LoadingIndicator(
-                        indicatorType: Indicator.circleStrokeSpin,
-                        colors: [Colors.amber],
-                      ),
-                    )
-                  : SizedBox(),
+              // widget.isLoading
+              //     ? SizedBox(
+              //         width: 40,
+              //         height: 40,
+              //         child: LoadingIndicator(
+              //           indicatorType: Indicator.circleStrokeSpin,
+              //           colors: [Colors.amber],
+              //         ),
+              //       )
+              //     : SizedBox(),
             ],
           ),
           IconButton(
