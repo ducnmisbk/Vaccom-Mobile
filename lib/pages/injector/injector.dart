@@ -42,17 +42,17 @@ class _InjectorPageState extends State<InjectorPage>
     super.initState();
 
     viewModel.injectorsStream.listen((list) {
-      if (list != null && list.data.isNotEmpty) {
-        setState(() {
-          dataArray = list.data;
-          numberOfPage = list.total ~/ searchQuery.size;
-          _refreshCtrl.refreshCompleted();
-          _isPageLoading = false;
-          if (isFirstLoading) {
-            isFirstLoading = false;
-          }
-        });
+      _refreshCtrl.refreshCompleted();
+      _isPageLoading = false;
+      if (isFirstLoading) {
+        isFirstLoading = false;
       }
+
+      if (list != null && list.data.isNotEmpty) {
+        dataArray = list.data;
+        numberOfPage = list.total ~/ searchQuery.size;
+      }
+      setState(() {});
     });
 
     getData();

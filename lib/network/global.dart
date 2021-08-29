@@ -15,7 +15,7 @@ class Global {
 
   String get authority => _baseUrl;
 
-  ServerInfo _serverInfo = ServerInfo.mobile;
+  ServerInfo _serverInfo = ServerInfo.vaccom;
   ServerInfo get server => _serverInfo;
 
   setServer(ServerInfo info) {

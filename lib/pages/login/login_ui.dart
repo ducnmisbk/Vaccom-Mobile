@@ -67,7 +67,7 @@ class _LoginPage extends State<LoginPage> {
 
   Future<List<ServerInfo>> getServerList() async {
     Toast.showLoading();
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(Duration(milliseconds: 300));
     Toast.dismiss();
     return ServerInfo.all;
   }
