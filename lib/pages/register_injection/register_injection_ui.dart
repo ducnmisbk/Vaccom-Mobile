@@ -4,7 +4,7 @@ import 'package:vaccom_mobile/components/custom_app_bar.dart';
 import 'package:vaccom_mobile/components/custom_date_input/custom_date_input_ui.dart';
 import 'package:vaccom_mobile/components/custom_form_input.dart';
 import 'package:vaccom_mobile/components/custom_picker_input/custom_picker_input_ui.dart';
-import 'register_injection_controller.dart';
+import 'register_injection_controller.dart';
 
 class RegisterInjection extends StatelessWidget {
   final RegisterInjectionController controller =
