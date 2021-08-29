@@ -112,7 +112,8 @@ extension ApiMethod on API {
   static dynamic processResponse(http.Response response) {
     switch (response.statusCode) {
       case 200:
-        var responseJson = json.decode(response.body);
+        var utf8Decode = utf8.decode(response.bodyBytes);
+        var responseJson = json.decode(utf8Decode);
         logger.info(responseJson);
         return responseJson;
         break;

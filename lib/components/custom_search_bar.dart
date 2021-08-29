@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:vaccom_mobile/commons/color.dart';
 
 class CustomSearchBar extends StatefulWidget {

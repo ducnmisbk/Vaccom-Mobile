@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:vaccom_mobile/commons/utils.dart';
 
 class InjectorPaging {
@@ -79,6 +78,13 @@ class NguoiTiemChung {
   String maQr;
   List<dynamic> muiTiemChung;
   List<dynamic> phieuHenTiem;
+
+  bool get isDuplicate {
+    if (kiemTraTrung == null) {
+      return false;
+    }
+    return kiemTraTrung == 2;
+  }
 
   factory NguoiTiemChung.fromJson(Map<String, dynamic> json) => NguoiTiemChung(
     id: json["id"],
