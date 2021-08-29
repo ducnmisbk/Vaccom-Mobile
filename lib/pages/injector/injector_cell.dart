@@ -72,7 +72,7 @@ class InjectorCell extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               richText(
-                title: r'Họ tên',
+                title: r'Họ tên: ',
                 value: item.hoVaTen,
                 style: textStyle.copyWith(
                   color: AppColor.link,
@@ -81,7 +81,7 @@ class InjectorCell extends StatelessWidget {
               ),
               DashDivider(),
               richText(
-                title: r'Ngày sinh',
+                title: r'Ngày sinh: ',
                 value: item.ngaySinh,
               ),
               DashDivider(),

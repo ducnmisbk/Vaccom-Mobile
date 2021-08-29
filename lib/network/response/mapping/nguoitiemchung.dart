@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:vaccom_mobile/commons/utils.dart';
 
 class InjectorPaging {
