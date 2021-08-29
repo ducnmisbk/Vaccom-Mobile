@@ -26,7 +26,7 @@ class _LoginPage extends State<LoginPage> {
 
   final FocusNode _focusNode = FocusNode();
 
-  ServerInfo serverInfo = ServerInfo.vaccom;
+  ServerInfo serverInfo = Global.shared.server;
   final vaccomBanner = Image.asset('assets/images/logo_banner.png');
 
   @override
@@ -109,7 +109,7 @@ class _LoginPage extends State<LoginPage> {
 
     if (server != null && server.title != serverInfo.title) {
       setState(() => serverInfo = server);
-      Global.shared.setBaseUrl(server);
+      Global.shared.setServer(server);
     }
   }
 
@@ -237,7 +237,7 @@ class _LoginPage extends State<LoginPage> {
                 children: <Widget>[
                   Expanded(
                     child: Text(
-                      serverInfo.title,
+                      serverInfo.title ?? r'- Chọn máy chủ -',
                       style: GoogleFonts.roboto(
                         color: AppColor.main,
                         fontWeight: FontWeight.w600,

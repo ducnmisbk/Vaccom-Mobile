@@ -7,13 +7,19 @@ class Global {
   static String _schema = 'https';
   static String _baseUrl = r'thachban.vaccom.vn:8080/rest/v1/';
 
-  Global._();
+  Global() {
+    setServer(_serverInfo);
+  }
 
-  static final shared = Global._();
+  static final shared = Global();
 
   String get authority => _baseUrl;
 
-  setBaseUrl(ServerInfo info) {
+  ServerInfo _serverInfo = ServerInfo.mobile;
+  ServerInfo get server => _serverInfo;
+
+  setServer(ServerInfo info) {
+    _serverInfo = info;
     _baseUrl = info.baseUrl;
     _schema = info.protocol;
   }
