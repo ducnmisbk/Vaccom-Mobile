@@ -140,9 +140,11 @@ class RegisterInjection extends StatelessWidget {
                     searchPlaceholder: r'Nhập tên Cơ sở y tế',
                     onSelectedData: (item) async {
                       var id = int.tryParse(item.value.toString());
-                      await controller.getPhuongXa(id);
+                      await controller.getDiaBanCoSo(id);
                     },
                   ),
+                ]),
+                rowInput([
                   CustomPickerInput(
                     controller: controller.localCtrl,
                     mainContext: context,

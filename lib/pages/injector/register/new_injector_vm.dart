@@ -1,4 +1,4 @@
-
+import 'package:vaccom_mobile/model/base_item.dart';
 import 'package:vaccom_mobile/network/response/response.dart';
 import 'package:vaccom_mobile/view_model/base.dart';
 
