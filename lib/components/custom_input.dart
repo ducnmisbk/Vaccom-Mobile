@@ -4,6 +4,7 @@ import 'package:vaccom_mobile/commons/color.dart';
 
 class CustomInput extends StatefulWidget {
   final String title;
+  final String value;
   final TextStyle style;
   final Stream<bool> invalid;
   final String invalidText;
@@ -17,6 +18,7 @@ class CustomInput extends StatefulWidget {
 
   const CustomInput({
     this.title = '',
+    this.value = '',
     this.invalid,
     this.style,
     this.onChanged,
@@ -106,21 +108,34 @@ class _CustomInputState extends State<CustomInput> {
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Center(
-                            child: TextField(
-                              readOnly: widget.isButton,
-                              controller: textCtrl,
-                              style: widget.style ?? GoogleFonts.roboto(),
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                contentPadding: EdgeInsets.only(bottom: 8),
-                                hintText: widget.hintText ?? widget.title,
-                                hintStyle: widget.style ?? GoogleFonts.roboto(),
-                              ),
-                              cursorColor: cursorColor,
-                              keyboardType: widget.keyboardType,
-                              onChanged: widget.onChanged,
-                              textInputAction: TextInputAction.done,
-                            ),
+                            child: widget.isButton
+                                ? Row(
+                                    children: [
+                                      Text(
+                                        widget.value ??
+                                            (widget.hintText ?? widget.title),
+                                        style: widget.style ??
+                                            GoogleFonts.roboto(),
+                                      ),
+                                    ],
+                                  )
+                                : TextField(
+                                    readOnly: widget.isButton,
+                                    controller: textCtrl,
+                                    style: widget.style ?? GoogleFonts.roboto(),
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      contentPadding:
+                                          EdgeInsets.only(bottom: 8),
+                                      hintText: widget.hintText ?? widget.title,
+                                      hintStyle:
+                                          widget.style ?? GoogleFonts.roboto(),
+                                    ),
+                                    cursorColor: cursorColor,
+                                    keyboardType: widget.keyboardType,
+                                    onChanged: widget.onChanged,
+                                    textInputAction: TextInputAction.done,
+                                  ),
                           ),
                         ),
                         widget.isButton

@@ -1,4 +1,5 @@
 import 'package:vaccom_mobile/commons/utils.dart';
+import 'package:vaccom_mobile/model/base_item.dart';
 
 class InjectorPaging {
   int total;
@@ -84,6 +85,18 @@ class NguoiTiemChung {
       return false;
     }
     return kiemTraTrung == 2;
+  }
+
+  static List<BaseItem> genders = [
+    BaseItem(name: 'Nam', id: 0),
+    BaseItem(name: 'Nữ', id: 1),
+    BaseItem(name: r'Không xác định', id: 2),
+  ];
+
+  String get gender {
+    if (gioiTinh == null) return null;
+    var gender = genders.firstWhere((e) => e.id == gioiTinh).name;
+    return gender;
   }
 
   factory NguoiTiemChung.fromJson(Map<String, dynamic> json) => NguoiTiemChung(

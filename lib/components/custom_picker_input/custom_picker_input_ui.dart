@@ -406,93 +406,94 @@ class _DropDownContentState extends State<DropDownContent> {
                       )
                     : SizedBox(),
                 Expanded(
-                  // child: ListView.builder(
-                  //   itemCount: dataFilter.length,
-                  //   itemBuilder: (BuildContext context, int index) {
-                  //     return Container(
-                  //       height: itemHeight,
-                  //       padding: EdgeInsets.symmetric(horizontal: 16),
-                  //       child: InkWell(
-                  //         onTap: () {
-                  //           // if (widget.type == DropDownType.multiSelect) {
-                  //           //   onPressItemMultiselect(dataFilter[index]);
-                  //           // } else
-                  //           widget.onPressItem(index, dataFilter[index]);
-                  //         },
-                  //         child: Container(
-                  //           height: double.infinity,
-                  //           alignment: Alignment.center,
-                  //           decoration: BoxDecoration(
-                  //             border: Border(
-                  //               bottom: BorderSide(
-                  //                 color: AppColor.divider,
-                  //                 width: 0.7,
-                  //               ),
-                  //             ),
-                  //           ),
-                  //           child:
-                  //               // widget.type == DropDownType.multiSelect
-                  //               //     ? Container(
-                  //               //         padding: EdgeInsets.symmetric(vertical: 12),
-                  //               //         child: Row(
-                  //               //           crossAxisAlignment:
-                  //               //               CrossAxisAlignment.start,
-                  //               //           children: [
-                  //               //             Image(
-                  //               //               width: 20,
-                  //               //               height: 20,
-                  //               //               image: AssetImage(dataFilter[index]
-                  //               //                       ['active']
-                  //               //                   ? 'assets/images/icon_checkbox_active.png'
-                  //               //                   : 'assets/images/icon_checkbox.png'),
-                  //               //             ),
-                  //               //             SizedBox(
-                  //               //               width: 8,
-                  //               //             ),
-                  //               //             Expanded(
-                  //               //               child: Column(
-                  //               //                 crossAxisAlignment:
-                  //               //                     CrossAxisAlignment.start,
-                  //               //                 children: [
-                  //               //                   Text(
-                  //               //                     '${dataFilter[index]['title']}',
-                  //               //                     textAlign: TextAlign.left,
-                  //               //                     maxLines: 2,
-                  //               //                     style: TextStyle(
-                  //               //                       fontWeight: FontWeight.normal,
-                  //               //                       fontSize: 16,
-                  //               //                       color: AppColor.nearlyBlack,
-                  //               //                     ),
-                  //               //                   ),
-                  //               //                 ],
-                  //               //               ),
-                  //               //             ),
-                  //               //           ],
-                  //               //         ),
-                  //               //       )
-                  //               //     :
-                  //               // dataFilter[index]['content'] ??
-                  //               Padding(
-                  //             padding: const EdgeInsets.all(8),
-                  //             child: Text(
-                  //               '${dataFilter[index].title}',
-                  //               maxLines: 3,
-                  //               textAlign: TextAlign.center,
-                  //               style: GoogleFonts.roboto(
-                  //                 color: (widget.currentData != null &&
-                  //                         (widget.currentData.value ==
-                  //                             dataFilter[index].value))
-                  //                     ? AppColor.link
-                  //                     : AppColor.nearlyBlack,
-                  //                 fontSize: 16,
-                  //               ),
-                  //             ),
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     );
-                  //   },
-                  // ),
+                  /**
+                  child: ListView.builder(
+                    itemCount: dataFilter.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        height: itemHeight,
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        child: InkWell(
+                          onTap: () {
+                            // if (widget.type == DropDownType.multiSelect) {
+                            //   onPressItemMultiselect(dataFilter[index]);
+                            // } else
+                            widget.onPressItem(index, dataFilter[index]);
+                          },
+                          child: Container(
+                            height: double.infinity,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: AppColor.divider,
+                                  width: 0.7,
+                                ),
+                              ),
+                            ),
+                            child:
+                                // widget.type == DropDownType.multiSelect
+                                //     ? Container(
+                                //         padding: EdgeInsets.symmetric(vertical: 12),
+                                //         child: Row(
+                                //           crossAxisAlignment:
+                                //               CrossAxisAlignment.start,
+                                //           children: [
+                                //             Image(
+                                //               width: 20,
+                                //               height: 20,
+                                //               image: AssetImage(dataFilter[index]
+                                //                       ['active']
+                                //                   ? 'assets/images/icon_checkbox_active.png'
+                                //                   : 'assets/images/icon_checkbox.png'),
+                                //             ),
+                                //             SizedBox(
+                                //               width: 8,
+                                //             ),
+                                //             Expanded(
+                                //               child: Column(
+                                //                 crossAxisAlignment:
+                                //                     CrossAxisAlignment.start,
+                                //                 children: [
+                                //                   Text(
+                                //                     '${dataFilter[index]['title']}',
+                                //                     textAlign: TextAlign.left,
+                                //                     maxLines: 2,
+                                //                     style: TextStyle(
+                                //                       fontWeight: FontWeight.normal,
+                                //                       fontSize: 16,
+                                //                       color: AppColor.nearlyBlack,
+                                //                     ),
+                                //                   ),
+                                //                 ],
+                                //               ),
+                                //             ),
+                                //           ],
+                                //         ),
+                                //       )
+                                //     :
+                                // dataFilter[index]['content'] ??
+                                Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: Text(
+                                '${dataFilter[index].title}',
+                                maxLines: 3,
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.roboto(
+                                  color: (widget.currentData != null &&
+                                          (widget.currentData.value ==
+                                              dataFilter[index].value))
+                                      ? AppColor.link
+                                      : AppColor.nearlyBlack,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ), */
                   child: ListView(
                     padding: EdgeInsets.all(8),
                     children: ListTile.divideTiles(
