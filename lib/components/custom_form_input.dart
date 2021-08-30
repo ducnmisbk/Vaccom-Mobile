@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:vaccom_mobile/commons/color.dart';
+import 'package:vaccom_mobile/commons/styles.dart';
 
 class CustomFormInput extends StatelessWidget {
   final TextEditingController controller;
@@ -13,6 +14,7 @@ class CustomFormInput extends StatelessWidget {
   final Function validator;
   final bool enabled;
   final int maxLines;
+  final double radius;
   final bool required;
   final TextCapitalization textCapitalization;
   final Function onChanged;
@@ -29,6 +31,7 @@ class CustomFormInput extends StatelessWidget {
     this.required = false,
     this.onChanged,
     this.maxLines = 1,
+    this.radius = 5,
     this.textCapitalization = TextCapitalization.none,
   });
 
@@ -39,41 +42,41 @@ class CustomFormInput extends StatelessWidget {
       onChanged: onChanged,
       decoration: InputDecoration(
         isDense: true,
-        contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+        contentPadding: EdgeInsets.fromLTRB(12, 16, 8, 16),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(radius),
           borderSide: BorderSide(
             color: AppColor.deactive,
           ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(radius),
           borderSide: BorderSide(
             color: AppColor.deactive,
           ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(radius),
           borderSide: BorderSide(
-            color: AppColor.link,
-            width: 2,
+            color: AppColor.main,
+            width: 1,
           ),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(radius),
           borderSide: BorderSide(
             color: AppColor.error,
-            width: 2,
+            width: 1,
           ),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(radius),
           borderSide: BorderSide(
             color: AppColor.error,
           ),
         ),
         disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(radius),
           borderSide: BorderSide(
             color: AppColor.deactive,
           ),
@@ -84,11 +87,7 @@ class CustomFormInput extends StatelessWidget {
         filled: true,
         fillColor: enabled ? Colors.white : AppColor.deactive,
       ),
-      style: TextStyle(
-        fontWeight: FontWeight.normal,
-        fontSize: 14,
-        color: AppColor.nearlyBlack,
-      ),
+      style: AppStyle.normal,
       enabled: enabled,
       controller: controller,
       keyboardType: keyboardType,

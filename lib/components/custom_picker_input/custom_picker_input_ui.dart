@@ -1,4 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tiengviet/tiengviet.dart';
 import 'package:vaccom_mobile/commons/color.dart';
 import '../custom_form_input.dart';
@@ -15,12 +19,14 @@ class CustomPickerInput extends StatefulWidget {
   final bool disable;
   final bool showSearchBar;
   final Function selectData;
+  final Function(PickerItem) onSelectedData;
   final Function onDismiss;
   final BuildContext mainContext;
   final bool showButtonSearch;
   final String searchPlaceholder;
   final bool showDoneButton;
   final bool noSort;
+
   //Trường hợp nhập ô search box và lấy value từ ô đó
   final bool getValueFromSearchBox;
   final Function validator;
@@ -30,6 +36,7 @@ class CustomPickerInput extends StatefulWidget {
   CustomPickerInput({
     @required this.label,
     this.selectData,
+    this.onSelectedData,
     @required this.controller,
     @required this.mainContext,
     this.onDismiss,
@@ -43,6 +50,7 @@ class CustomPickerInput extends StatefulWidget {
     this.validator,
     this.type = DropDownType.singleSelect,
   });
+
   @override
   _CustomPickerInputState createState() => _CustomPickerInputState();
 }
@@ -62,6 +70,9 @@ class _CustomPickerInputState extends State<CustomPickerInput> {
     bool getValueFromSearchBox,
     DropDownType type,
   }) {
+    if (data == null || data.isEmpty) {
+      return;
+    }
     if ((showSearchBar && data.length > 10) && !noSort)
       data.sort((a, b) =>
           TiengViet.parse(a.title).compareTo(TiengViet.parse(b.title)));
@@ -82,6 +93,10 @@ class _CustomPickerInputState extends State<CustomPickerInput> {
         selectData: (PickerItem dataValue) async {
           if (selectData != null) await selectData(dataValue);
           widget.controller.dataValue = dataValue.value;
+
+          if (widget.onSelectedData != null) {
+            widget.onSelectedData(dataValue);
+          }
         },
         type: type);
   }
@@ -165,18 +180,19 @@ class _CustomPickerInputState extends State<CustomPickerInput> {
                 if (!widget.disable) {
                   BuildContext _context = widget.mainContext ?? context;
                   selectCardType(
-                      mainContext: _context,
-                      data: widget.controller.listMap,
-                      selectData: widget.selectData,
-                      onDismiss: widget.onDismiss,
-                      label: widget.label,
-                      showSearchBar: widget.showSearchBar,
-                      noSort: widget.noSort,
-                      searchPlaceholder: widget.searchPlaceholder,
-                      showButtonSearch: widget.showButtonSearch,
-                      showDoneButton: widget.showDoneButton,
-                      getValueFromSearchBox: widget.getValueFromSearchBox,
-                      type: widget.type);
+                    mainContext: _context,
+                    data: widget.controller.listMap,
+                    selectData: widget.selectData,
+                    onDismiss: widget.onDismiss,
+                    label: widget.label,
+                    showSearchBar: widget.showSearchBar,
+                    noSort: widget.noSort,
+                    searchPlaceholder: widget.searchPlaceholder,
+                    showButtonSearch: widget.showButtonSearch,
+                    showDoneButton: widget.showDoneButton,
+                    getValueFromSearchBox: widget.getValueFromSearchBox,
+                    type: widget.type,
+                  );
                 }
               },
             ),
@@ -214,6 +230,7 @@ class DropDownContent extends StatefulWidget {
       this.getValueFromSearchBox = false,
       this.selectMultidata,
       this.type = DropDownType.singleSelect});
+
   @override
   _DropDownContentState createState() => _DropDownContentState();
 }
@@ -302,7 +319,7 @@ class _DropDownContentState extends State<DropDownContent> {
     return SafeArea(
       top: true,
       child: Container(
-        height: height,
+        height: min(444, Get.height / 2),
         child: ClipRRect(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(16),
@@ -319,7 +336,7 @@ class _DropDownContentState extends State<DropDownContent> {
                     border: Border(
                       bottom: BorderSide(
                         width: 1,
-                        color: AppColor.grey,
+                        color: AppColor.divider,
                       ),
                     ),
                   ),
@@ -340,8 +357,8 @@ class _DropDownContentState extends State<DropDownContent> {
                         child: Text(
                           widget.label,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.normal,
+                          style: GoogleFonts.merriweather(
+                            fontWeight: FontWeight.w500,
                             fontSize: 16,
                             color: AppColor.nearlyBlack,
                           ),
@@ -355,10 +372,10 @@ class _DropDownContentState extends State<DropDownContent> {
                                   // widget.type == DropDownType.multiSelect
                                   //     ? onPressDoneMultiselect()
                                   //     :
-                                       widget.onPressItem(null, {
-                                          'title': searchController.text,
-                                          'value': searchController.text,
-                                        });
+                                  widget.onPressItem(null, {
+                                    'title': searchController.text,
+                                    'value': searchController.text,
+                                  });
                                 },
                                 child: Text(
                                   'Xác nhận',
@@ -381,7 +398,7 @@ class _DropDownContentState extends State<DropDownContent> {
                         padding: EdgeInsets.only(top: 16, left: 16, right: 16),
                         child: CustomSearchBar(
                           placeholder: widget.placeholder,
-                          background: AppColor.border,
+                          background: AppColor.backgroundWhite,
                           controller: searchController,
                           showButtons: widget.showButtonSearch,
                           onChanged: filterData,
@@ -389,87 +406,111 @@ class _DropDownContentState extends State<DropDownContent> {
                       )
                     : SizedBox(),
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: dataFilter.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      
-                      return Container(
-                        height: itemHeight,
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: InkWell(
-                          onTap: () {
-                            // if (widget.type == DropDownType.multiSelect) {
-                            //   onPressItemMultiselect(dataFilter[index]);
-                            // } else
-                              widget.onPressItem(index, dataFilter[index]);
-                          },
-                          child: Container(
-                            height: double.infinity,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom:
-                                    BorderSide(color: AppColor.grey, width: 1),
-                              ),
+                  // child: ListView.builder(
+                  //   itemCount: dataFilter.length,
+                  //   itemBuilder: (BuildContext context, int index) {
+                  //     return Container(
+                  //       height: itemHeight,
+                  //       padding: EdgeInsets.symmetric(horizontal: 16),
+                  //       child: InkWell(
+                  //         onTap: () {
+                  //           // if (widget.type == DropDownType.multiSelect) {
+                  //           //   onPressItemMultiselect(dataFilter[index]);
+                  //           // } else
+                  //           widget.onPressItem(index, dataFilter[index]);
+                  //         },
+                  //         child: Container(
+                  //           height: double.infinity,
+                  //           alignment: Alignment.center,
+                  //           decoration: BoxDecoration(
+                  //             border: Border(
+                  //               bottom: BorderSide(
+                  //                 color: AppColor.divider,
+                  //                 width: 0.7,
+                  //               ),
+                  //             ),
+                  //           ),
+                  //           child:
+                  //               // widget.type == DropDownType.multiSelect
+                  //               //     ? Container(
+                  //               //         padding: EdgeInsets.symmetric(vertical: 12),
+                  //               //         child: Row(
+                  //               //           crossAxisAlignment:
+                  //               //               CrossAxisAlignment.start,
+                  //               //           children: [
+                  //               //             Image(
+                  //               //               width: 20,
+                  //               //               height: 20,
+                  //               //               image: AssetImage(dataFilter[index]
+                  //               //                       ['active']
+                  //               //                   ? 'assets/images/icon_checkbox_active.png'
+                  //               //                   : 'assets/images/icon_checkbox.png'),
+                  //               //             ),
+                  //               //             SizedBox(
+                  //               //               width: 8,
+                  //               //             ),
+                  //               //             Expanded(
+                  //               //               child: Column(
+                  //               //                 crossAxisAlignment:
+                  //               //                     CrossAxisAlignment.start,
+                  //               //                 children: [
+                  //               //                   Text(
+                  //               //                     '${dataFilter[index]['title']}',
+                  //               //                     textAlign: TextAlign.left,
+                  //               //                     maxLines: 2,
+                  //               //                     style: TextStyle(
+                  //               //                       fontWeight: FontWeight.normal,
+                  //               //                       fontSize: 16,
+                  //               //                       color: AppColor.nearlyBlack,
+                  //               //                     ),
+                  //               //                   ),
+                  //               //                 ],
+                  //               //               ),
+                  //               //             ),
+                  //               //           ],
+                  //               //         ),
+                  //               //       )
+                  //               //     :
+                  //               // dataFilter[index]['content'] ??
+                  //               Padding(
+                  //             padding: const EdgeInsets.all(8),
+                  //             child: Text(
+                  //               '${dataFilter[index].title}',
+                  //               maxLines: 3,
+                  //               textAlign: TextAlign.center,
+                  //               style: GoogleFonts.roboto(
+                  //                 color: (widget.currentData != null &&
+                  //                         (widget.currentData.value ==
+                  //                             dataFilter[index].value))
+                  //                     ? AppColor.link
+                  //                     : AppColor.nearlyBlack,
+                  //                 fontSize: 16,
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     );
+                  //   },
+                  // ),
+                  child: ListView(
+                    padding: EdgeInsets.all(8),
+                    children: ListTile.divideTiles(
+                      context: context,
+                      tiles: List.generate(
+                        dataFilter.length,
+                        (int index) {
+                          return ListTile(
+                            title: Text(
+                              dataFilter[index].title,
+                              style: GoogleFonts.roboto(),
                             ),
-                            child: 
-                            // widget.type == DropDownType.multiSelect
-                            //     ? Container(
-                            //         padding: EdgeInsets.symmetric(vertical: 12),
-                            //         child: Row(
-                            //           crossAxisAlignment:
-                            //               CrossAxisAlignment.start,
-                            //           children: [
-                            //             Image(
-                            //               width: 20,
-                            //               height: 20,
-                            //               image: AssetImage(dataFilter[index]
-                            //                       ['active']
-                            //                   ? 'assets/images/icon_checkbox_active.png'
-                            //                   : 'assets/images/icon_checkbox.png'),
-                            //             ),
-                            //             SizedBox(
-                            //               width: 8,
-                            //             ),
-                            //             Expanded(
-                            //               child: Column(
-                            //                 crossAxisAlignment:
-                            //                     CrossAxisAlignment.start,
-                            //                 children: [
-                            //                   Text(
-                            //                     '${dataFilter[index]['title']}',
-                            //                     textAlign: TextAlign.left,
-                            //                     maxLines: 2,
-                            //                     style: TextStyle(
-                            //                       fontWeight: FontWeight.normal,
-                            //                       fontSize: 16,
-                            //                       color: AppColor.nearlyBlack,
-                            //                     ),
-                            //                   ),
-                            //                 ],
-                            //               ),
-                            //             ),
-                            //           ],
-                            //         ),
-                            //       )
-                            //     : 
-                                // dataFilter[index]['content'] ??
-                                    Text(
-                                      '${dataFilter[index].title}',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: (widget.currentData != null &&
-                                                (widget.currentData.value ==
-                                                    dataFilter[index].value))
-                                            ? AppColor.link
-                                            : AppColor.nearlyBlack,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                          ),
-                        ),
-                      );
-                    },
+                            onTap: () =>
+                                widget.onPressItem(index, dataFilter[index]),
+                          );
+                        },
+                      ),
+                    ).toList(),
                   ),
                 ),
               ],

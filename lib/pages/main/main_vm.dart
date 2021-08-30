@@ -6,7 +6,7 @@ import 'package:vaccom_mobile/view_model/base.dart';
 class MainViewModel extends BaseViewModel {
   Future<Summary> getSummary() async {
     try {
-      var res = await Covid19Vaccine.getData(
+      var res = await VacNetwork.getData(
         uri: 'https://tiemchungcovid19.gov.vn/api/public/dashboard/vaccination-statistics/summary',
       );
       return Summary.fromJson(res);
@@ -17,7 +17,7 @@ class MainViewModel extends BaseViewModel {
 
   Future<Dashboard> getDashboard() async {
     try {
-      var res = await Covid19Vaccine.getData(
+      var res = await VacNetwork.getData(
         uri: 'https://tiemchungcovid19.gov.vn/api/public/dashboard/vaccination-statistics/get-detail-latest',
       );
       return Dashboard.fromJson(res);

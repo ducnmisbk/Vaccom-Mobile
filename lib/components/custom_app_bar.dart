@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:vaccom_mobile/commons/color.dart';
+import 'package:vaccom_mobile/commons/constants.dart';
+import 'package:vaccom_mobile/commons/styles.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final List<Widget> actions;
   final bool canBack;
-  const CustomAppBar({
+
+  const GradientAppBar({
     Key key,
     this.title = '',
     this.actions = const [],
@@ -28,7 +30,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Color(0xFF171cc2), Color(0xFFff5200)],
+                colors: AppConstant.gradientColor,
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
               ),
@@ -37,20 +39,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           AppBar(
             brightness: Brightness.dark,
             backgroundColor: Colors.transparent,
-            leading: canBack
-                ? IconButton(
-                    icon: Icon(Icons.chevron_left),
-                    onPressed: () {
-                      Get.back();
-                    })
-                : null,
+            leading: canBack ? BackButton(onPressed: () => Get.back()) : null,
             title: Text(
               title,
-              style: GoogleFonts.roboto(
-                color: AppColor.nearlyWhite,
-                fontWeight: FontWeight.w500,
-                fontSize: 15,
-              ),
+              style: AppStyle.appBarTitle,
             ),
             actions: actions,
           )

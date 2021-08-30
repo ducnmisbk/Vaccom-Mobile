@@ -33,7 +33,7 @@ class CustomSearchBar extends StatefulWidget {
       this.canSearch = true,
       this.showButtons = true,
       this.width,
-      this.height = 60,
+      this.height = kMinInteractiveDimension,
       this.keyboardType = TextInputType.text,
       this.showVoiceIcon = false,
       this.showSubmitButton = false})
@@ -70,6 +70,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
     if (widget.width != null) width = widget.width;
     return Container(
       height: widget.height,
+      padding: EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         color: widget.background,
@@ -81,11 +82,12 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
               ? SizedBox(
                   width: 40,
                   child: TextButton(
-                      onPressed: () => widget.onClickVoice(),
-                      child: Icon(
-                        Icons.search,
-                        color: AppColor.nearlyBlack,
-                      )),
+                    onPressed: () => widget.onClickVoice(),
+                    child: Icon(
+                      Icons.search,
+                      color: AppColor.nearlyBlack,
+                    ),
+                  ),
                 )
               : SizedBox(),
           width > 100
@@ -105,8 +107,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                         hintStyle: TextStyle(color: widget.hintTextColor),
                         fillColor: Colors.transparent,
                         isDense: true,
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 0, horizontal: 8),
+                        contentPadding: EdgeInsets.zero,
                         focusedBorder: InputBorder.none,
                         enabledBorder: InputBorder.none,
                       ),
