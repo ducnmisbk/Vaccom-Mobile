@@ -151,26 +151,28 @@ class _InjectorPageState extends State<InjectorPage>
                 ),
               ),
             ),
-            PagingFooter(
-              isLoading: _isPageLoading,
-              numberOfPage: numberOfPage,
-              onNext: () {
-                searchQuery.page += 1;
-                reloadPageData();
-              },
-              onPrevious: () {
-                searchQuery.page -= 1;
-                reloadPageData();
-              },
-              onPage: (page) {
-                searchQuery.page = page;
-                reloadPageData();
-              },
-              onSize: (size) {
-                searchQuery.size = size;
-                reloadPageData();
-              },
-            ),
+            dataArray.isNotEmpty
+                ? PagingFooter(
+                    isLoading: _isPageLoading,
+                    numberOfPage: numberOfPage,
+                    onNext: () {
+                      searchQuery.page += 1;
+                      reloadPageData();
+                    },
+                    onPrevious: () {
+                      searchQuery.page -= 1;
+                      reloadPageData();
+                    },
+                    onPage: (page) {
+                      searchQuery.page = page;
+                      reloadPageData();
+                    },
+                    onSize: (size) {
+                      searchQuery.size = size;
+                      reloadPageData();
+                    },
+                  )
+                : SizedBox.shrink(),
             SizedBox(height: MediaQuery.of(context).padding.bottom),
           ],
         );

@@ -90,10 +90,10 @@ class RemoteAPI implements API {
 
   Future<List<DiaBanCoSo>> getDiaBanCoSo(int cosoyteId) async {
     final apiPath = ApiPath.getDiaBanCoSo(cosoyteId);
-    final Map<String, String> param = {};
+    final Map<String, dynamic> param = {};
     try {
       var data = await ApiMethod.getData(apiPath, param);
-      return DiaBanCoSo.listFromJson(data);
+      return DiaBanCoSo.listFromJson(data['data']);
     } catch (e) {
       throw e;
     }
