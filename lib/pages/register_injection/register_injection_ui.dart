@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vaccom_mobile/commons/color.dart';
 import 'package:vaccom_mobile/components/custom_app_bar.dart';
 import 'package:vaccom_mobile/components/custom_date_input/custom_date_input_ui.dart';
 import 'package:vaccom_mobile/components/custom_form_input.dart';
 import 'package:vaccom_mobile/components/custom_picker_input/custom_picker_input_ui.dart';
+import 'package:vaccom_mobile/components/vac_button.dart';
 import 'register_injection_controller.dart';
 
 class RegisterInjection extends StatelessWidget {
@@ -19,7 +21,7 @@ class RegisterInjection extends StatelessWidget {
           inputList.length,
           (index) => Expanded(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
+              padding: EdgeInsets.symmetric(horizontal: 4),
               child: inputList[index],
             ),
           ),
@@ -31,11 +33,9 @@ class RegisterInjection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Register Injection"),
-      body: 
-      Obx(
-        () => 
-        Container(
+      appBar: GradientAppBar(title: "Register Injection"),
+      body: Obx(
+        () => Container(
           width: double.infinity,
           height: double.infinity,
           child: SingleChildScrollView(
@@ -47,32 +47,28 @@ class RegisterInjection extends StatelessWidget {
                   CustomFormInput(
                     controller: controller.nameCtrl,
                     labelText: 'Họ và tên',
-                  ),
-                  CustomPickerInput(
-                    controller: controller.genderCtrl,
-                    mainContext: context,
-                    label: 'Giới tính',
+                    required: true,
                   ),
                 ]),
                 rowInput([
+                  CustomPickerInput(
+                    controller: controller.genderCtrl,
+                    mainContext: context,
+                    label: r'Giới tính',
+                  ),
                   CustomDateInput(
                     controller: controller.dobCtrl,
-                    label: 'Ngày sinh',
+                    label: r'Ngày sinh',
                   ),
+                ]),
+                rowInput([
                   CustomFormInput(
                     controller: controller.idCtrl,
                     labelText: 'Số CMND/CCCD',
                   ),
-                ]),
-                rowInput([
                   CustomFormInput(
                     controller: controller.bhytCtrl,
-                    labelText: 'Số thẻ BHYT',
-                  ),
-                  CustomFormInput(
-                    controller: controller.phoneCtrl,
-                    keyboardType: TextInputType.phone,
-                    labelText: 'Số điện thoại',
+                    labelText: r'Số thẻ BHYT',
                   ),
                 ]),
                 rowInput([
@@ -80,23 +76,48 @@ class RegisterInjection extends StatelessWidget {
                     controller: controller.emailCtrl,
                     labelText: 'Email',
                   ),
+                ]),
+                rowInput([
+                  CustomFormInput(
+                    controller: controller.phoneCtrl,
+                    keyboardType: TextInputType.phone,
+                    labelText: r'Số điện thoại',
+                  ),
+                  CustomPickerInput(
+                    controller: controller.groupCtrl,
+                    mainContext: context,
+                    label: r'Nhóm đối tượng',
+                    searchPlaceholder: r'Nhập tên đối tượng',
+                  ),
+                ]),
+                rowInput([
                   CustomPickerInput(
                     controller: controller.cityCtrl,
                     mainContext: context,
-                    label: 'Tỉnh/Thành phố',
-                    searchPlaceholder: 'Nhập tên Tình/Thành phố'
+                    label: r'Tỉnh/Thành phố',
+                    searchPlaceholder: r'Nhập tên Tình/Thành phố',
+                    onSelectedData: (item) async {
+                      var id = int.tryParse(item.value.toString());
+                      await controller.getQuanHuyen(id);
+                    },
                   ),
                 ]),
                 rowInput([
                   CustomPickerInput(
                     controller: controller.districtCtrl,
                     mainContext: context,
-                    label: 'Quận/Huyện',
+                    label: r'Quận/Huyện',
+                    searchPlaceholder: r'Nhập tên Quận/Huyện',
+                    onSelectedData: (item) async {
+                      var id = int.tryParse(item.value.toString());
+                      await controller.getPhuongXa(id);
+                    },
                   ),
                   CustomPickerInput(
                     controller: controller.wardCtrl,
                     mainContext: context,
-                    label: 'Phưởng/Xã',
+                    label: r'Phường/Xã',
+                    searchPlaceholder: r'Nhập tên Phường/Xã',
                   ),
                 ]),
                 rowInput([
@@ -106,14 +127,9 @@ class RegisterInjection extends StatelessWidget {
                   ),
                 ]),
                 rowInput([
-                  CustomPickerInput(
-                    controller: controller.groupCtrl,
-                    mainContext: context,
-                    label: 'Nhóm đối tượng',
-                  ),
                   CustomFormInput(
                     controller: controller.unitCtrl,
-                    labelText: 'Đơn vị công tác',
+                    labelText: r'Đơn vị công tác',
                   ),
                 ]),
                 rowInput([
@@ -121,11 +137,17 @@ class RegisterInjection extends StatelessWidget {
                     controller: controller.csytCtrl,
                     mainContext: context,
                     label: 'Cơ sở y tế',
+                    searchPlaceholder: r'Nhập tên Cơ sở y tế',
+                    onSelectedData: (item) async {
+                      var id = int.tryParse(item.value.toString());
+                      await controller.getPhuongXa(id);
+                    },
                   ),
                   CustomPickerInput(
                     controller: controller.localCtrl,
                     mainContext: context,
                     label: 'Địa bàn cơ sở',
+                    searchPlaceholder: r'Nhập tên Địa bàn cở sở',
                   ),
                 ]),
                 rowInput([
@@ -133,39 +155,66 @@ class RegisterInjection extends StatelessWidget {
                     controller: controller.danTocCtrl,
                     mainContext: context,
                     label: 'Dân tộc',
+                    searchPlaceholder: r'Nhập tên dân tộc',
                   ),
                   CustomPickerInput(
                     controller: controller.quocTichCtrl,
                     mainContext: context,
-                    label: 'Quốc tịch',
+                    label: r'Quốc tịch',
+                    searchPlaceholder: r'Nhập tên quốc gia',
                   ),
                 ]),
                 rowInput([
                   CustomFormInput(
                     controller: controller.tieuSuCtrl,
-                    labelText: 'Tiểu sử dị ứng',
+                    labelText: r'Tiểu sử dị ứng',
                   ),
                 ]),
                 rowInput([
                   CustomFormInput(
                     controller: controller.benhLyCtrl,
-                    labelText: 'Các bệnh lý đang mắc',
+                    labelText: r'Các bệnh lý đang mắc',
                   ),
+                ]),
+                rowInput([
                   CustomFormInput(
                     controller: controller.thuocCtrl,
-                    labelText: 'Các thuốc đang dùng',
+                    labelText: r'Các thuốc đang dùng',
                   ),
                 ]),
                 rowInput([
                   CustomDateInput(
                     controller: controller.ngayDKCtrl,
-                    label: 'Ngày đăng ký tiêm',
+                    label: r'Ngày đăng ký tiêm',
                   ),
+                  SizedBox(),
+                ]),
+                rowInput([
                   CustomFormInput(
                     controller: controller.luuYCtrl,
                     labelText: 'Lưu ý',
                   ),
                 ]),
+                Container(
+                  height: 54,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      VacButton(
+                        title: r'Hủy',
+                        color: AppColor.error,
+                        onTap: () => Get.back(),
+                      ),
+                      SizedBox(width: 16),
+                      VacButton(
+                        title: r'Đăng ký tiêm',
+                        color: AppColor.main,
+                        icon: Icons.save,
+                        onTap: () {},
+                      )
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
