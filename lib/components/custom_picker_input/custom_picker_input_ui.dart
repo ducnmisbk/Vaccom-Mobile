@@ -319,7 +319,7 @@ class _DropDownContentState extends State<DropDownContent> {
     return SafeArea(
       top: true,
       child: Container(
-        height: min(444, Get.height / 2),
+        height: min(500, Get.height / 2),
         child: ClipRRect(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(16),
@@ -395,9 +395,9 @@ class _DropDownContentState extends State<DropDownContent> {
                 ),
                 showSearch
                     ? Container(
-                        padding: EdgeInsets.only(top: 16, left: 16, right: 16),
                         child: CustomSearchBar(
                           placeholder: widget.placeholder,
+                          radius: 0,
                           background: AppColor.backgroundWhite,
                           controller: searchController,
                           showButtons: widget.showButtonSearch,

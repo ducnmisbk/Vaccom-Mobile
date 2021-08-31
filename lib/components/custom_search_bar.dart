@@ -15,13 +15,14 @@ class CustomSearchBar extends StatefulWidget {
   final bool showButtons;
   final double width;
   final double height;
+  final double radius;
   final bool showSubmitButton;
   final TextInputType keyboardType;
   final bool showVoiceIcon;
 
   const CustomSearchBar(
       {Key key,
-      this.placeholder = 'Bạn đang tìm kiếm gì ?',
+      this.placeholder = r'Bạn đang tìm kiếm gì ?',
       this.onSubmit,
       this.background = Colors.white,
       this.hintTextColor = Colors.grey,
@@ -33,6 +34,7 @@ class CustomSearchBar extends StatefulWidget {
       this.canSearch = true,
       this.showButtons = true,
       this.width,
+      this.radius = 8,
       this.height = kMinInteractiveDimension,
       this.keyboardType = TextInputType.text,
       this.showVoiceIcon = false,
@@ -72,7 +74,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
       height: widget.height,
       padding: EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(widget.radius),
         color: widget.background,
       ),
       child: Row(
