@@ -110,11 +110,9 @@ extension ApiMethod on API {
 
   /// Renew TOKEN
   static Future<void> renewToken() async {
-    final user = Global.shared.currentUser;
-    final u = user.tenDangNhap;
-    final p = user.matKhau;
+    final loginParam = await Utils.getLoginParam();
 
-    String basicAuth = 'Basic ' + base64Encode(utf8.encode('$u:$p'));
+    String basicAuth = 'Basic ' + base64Encode(utf8.encode(loginParam));
     logger.info(basicAuth);
 
     try {
