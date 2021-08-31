@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vaccom_mobile/commons/color.dart';
 import 'package:vaccom_mobile/commons/constants.dart';
 import 'package:vaccom_mobile/commons/styles.dart';
 
