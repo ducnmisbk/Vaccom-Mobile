@@ -35,7 +35,7 @@ Add the following to your settings.json
 ## 5. Open project and run in terminal of IDE
 >fvm use 2.2.3
 
-## How to run
+# How to run
 > fvm flutter run
 
 > fvm flutter --release
