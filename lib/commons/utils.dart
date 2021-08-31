@@ -57,7 +57,7 @@ class Utils {
 
   static Future<void> saveString(String value, String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString(value, key);
+    prefs.setString(key, value);
   }
 
   static Future<String> getLoginParam() async {
