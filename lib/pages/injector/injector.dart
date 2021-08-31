@@ -37,8 +37,10 @@ class _InjectorPageState extends State<InjectorPage>
   void initState() {
     _scrollController.addListener(() => Utils.hideKeyboard());
 
-    animationController =
-        AnimationController(duration: Duration(milliseconds: 300), vsync: this);
+    animationController = AnimationController(
+      duration: Duration(milliseconds: 300),
+      vsync: this,
+    );
     super.initState();
 
     viewModel.injectorsStream.listen((list) {
@@ -71,7 +73,6 @@ class _InjectorPageState extends State<InjectorPage>
   }
 
   void reloadPageData({bool pageLoading = true}) async {
-    setState(() => dataArray.clear());
     Toast.showLoading();
     viewModel.getInjectors(param: searchQuery);
     if (pageLoading) {

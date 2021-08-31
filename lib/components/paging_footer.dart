@@ -25,7 +25,6 @@ class PagingFooter extends StatefulWidget {
 
 class PagingFooterState extends State<PagingFooter> {
   int page = 0;
-  int size = 25;
   List<int> allPages = [];
 
   bool isKeyboardVisible = false;
@@ -82,10 +81,8 @@ class PagingFooterState extends State<PagingFooter> {
             onPressed: widget.isLoading ? null : () {
               var prevPage = page - 1;
               if (prevPage >= 0) {
-                setState(() {
-                  page = prevPage;
-                });
-                widget.onPage(page);
+                setState(() => page = prevPage);
+                widget.onPrevious();
               }
             },
           ),
@@ -118,10 +115,8 @@ class PagingFooterState extends State<PagingFooter> {
             onPressed: widget.isLoading ? null : () {
               var nextPage = page + 1;
               if (nextPage < allPages.length) {
-                setState(() {
-                  page = nextPage;
-                });
-                widget.onPage(page);
+                setState(() => page = nextPage);
+                widget.onNext();
               }
             },
           ),
