@@ -6,6 +6,7 @@ class BaseItem {
 
   BaseItem({this.id, this.name, this.code});
 
-  static List<PickerItem> parsePicker(List<BaseItem> data) =>
-      data.map((x) => PickerItem(title: x.name, value: x.id)).toList();
+  static List<PickerItem> parsePicker(List<BaseItem> data) => data
+      .map((x) => PickerItem(name: x.name, id: x.id, code: x.code))
+      .toList();
 }

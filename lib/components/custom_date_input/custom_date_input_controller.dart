@@ -22,7 +22,7 @@ class DatePickerController extends TextEditingController {
         text = '';
       } else {
         initDate = date;
-        text = DateFormat('dd-MM-yyyy').format(date);
+        text = DateFormat('dd/MM/yyyy').format(date);
       }
     } else {
       initDate = null;

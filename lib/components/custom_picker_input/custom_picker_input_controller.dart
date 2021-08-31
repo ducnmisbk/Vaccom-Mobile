@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class PickerItem {
-  String title;
-  dynamic value;
+  String name;
+  String code;
+  dynamic id;
   PickerItem({
-    this.title = '',
-    this.value,
+    this.name = '',
+    this.id,
+    this.code = '',
   });
 }
 
@@ -13,6 +15,18 @@ class PickerController extends TextEditingController {
   List<PickerItem> listMap;
   PickerItem itemData;
   dynamic itemValue;
+
+  String get pickedID {
+    return (itemData != null) ? '${itemData.id}' : '';
+  }
+
+  String get pickedName {
+    return (itemData != null) ? itemData.name : '';
+  }
+
+  String get pickedCode {
+    return (itemData != null) ? itemData.code : '';
+  }
 
   // PickerItem get data => itemData;
   // dynamic get dataValue => itemValue;
@@ -28,14 +42,14 @@ class PickerController extends TextEditingController {
   //value của item được chọn trong list
   set dataValue(dynamic _valueData) {
     if (_valueData != null && _valueData != '') {
-      itemData = listMap.firstWhere((element) => element.value == _valueData,
+      itemData = listMap.firstWhere((element) => element.id == _valueData,
           orElse: () => null);
       if (itemData != null) {
         itemValue = _valueData;
-        text = itemData.title;
+        text = itemData.name;
       } else {
         itemValue = _valueData;
-        itemData = PickerItem(title: _valueData, value: _valueData);
+        itemData = PickerItem(name: _valueData, id: _valueData);
         text = _valueData;
       }
     }
@@ -43,7 +57,7 @@ class PickerController extends TextEditingController {
 
   set dataValueCustom(_valueData) {
     itemValue = _valueData;
-    itemData = PickerItem(title: _valueData, value: _valueData);
+    itemData = PickerItem(name: _valueData, id: _valueData);
     text = _valueData;
   }
 
