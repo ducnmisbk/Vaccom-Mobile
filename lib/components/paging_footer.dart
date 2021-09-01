@@ -89,6 +89,9 @@ class PagingFooterState extends State<PagingFooter> {
           Stack(
             children: [
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.green,
+                ),
                 onPressed: () {},
                 child: Text(
                   '${page + 1}/${widget.numberOfPage}',
