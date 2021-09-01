@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:vaccom_mobile/commons/color.dart';
@@ -10,6 +11,7 @@ import 'package:vaccom_mobile/model/search_query.dart';
 import 'package:vaccom_mobile/network/response/response.dart';
 import 'package:vaccom_mobile/pages/injector/injector_cell.dart';
 import 'package:vaccom_mobile/pages/injector/injector_vm.dart';
+import 'package:vaccom_mobile/pages/injector/register/new_injector.dart';
 
 /// Danh sách người tiêm chủng
 class InjectorPage extends StatefulWidget {
@@ -81,6 +83,20 @@ class _InjectorPageState extends State<InjectorPage>
   }
 
   void setPageLoading() => setState(() => _isPageLoading = true);
+
+  void onAction(IAction ac, NguoiTiemChung injectUser) {
+    switch (ac) {
+      case IAction.edit:
+        Get.to(() => NewInjectorPage(
+          injectUser: injectUser,
+        ));
+        break;
+      default:
+        Toast.show(
+          text: ac.toString() + ' - ' + injectUser.hoVaTen,
+        );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
