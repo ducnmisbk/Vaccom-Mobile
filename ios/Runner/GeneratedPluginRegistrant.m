@@ -4,10 +4,22 @@
 
 #import "GeneratedPluginRegistrant.h"
 
+#if __has_include(<package_info/FLTPackageInfoPlugin.h>)
+#import <package_info/FLTPackageInfoPlugin.h>
+#else
+@import package_info;
+#endif
+
 #if __has_include(<path_provider/FLTPathProviderPlugin.h>)
 #import <path_provider/FLTPathProviderPlugin.h>
 #else
 @import path_provider;
+#endif
+
+#if __has_include(<qr_code_scanner/FlutterQrPlugin.h>)
+#import <qr_code_scanner/FlutterQrPlugin.h>
+#else
+@import qr_code_scanner;
 #endif
 
 #if __has_include(<share/FLTSharePlugin.h>)
@@ -37,7 +49,9 @@
 @implementation GeneratedPluginRegistrant
 
 + (void)registerWithRegistry:(NSObject<FlutterPluginRegistry>*)registry {
+  [FLTPackageInfoPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPackageInfoPlugin"]];
   [FLTPathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPathProviderPlugin"]];
+  [FlutterQrPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterQrPlugin"]];
   [FLTSharePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTSharePlugin"]];
   [FLTSharedPreferencesPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTSharedPreferencesPlugin"]];
   [SqflitePlugin registerWithRegistrar:[registry registrarForPlugin:@"SqflitePlugin"]];
