@@ -1,3 +1,5 @@
+# Install Flutter
+> https://flutter.dev/
 # Configuration fvm
 ## 1. Install fvm
 https://fvm.app/docs/getting_started/installation
@@ -34,3 +36,10 @@ Add the following to your settings.json
 ```
 ## 5. Open project and run in terminal of IDE
 >fvm use 2.2.3
+
+# How to run
+> fvm flutter run
+
+> fvm flutter --release
+
+> fvm flutter build apk --split-per-abi 

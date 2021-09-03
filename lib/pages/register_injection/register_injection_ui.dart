@@ -97,7 +97,7 @@ class RegisterInjection extends StatelessWidget {
                     label: r'Tỉnh/Thành phố',
                     searchPlaceholder: r'Nhập tên Tình/Thành phố',
                     onSelectedData: (item) async {
-                      var id = int.tryParse(item.value.toString());
+                      var id = int.tryParse(item.id.toString());
                       await controller.getQuanHuyen(id);
                     },
                   ),
@@ -109,7 +109,7 @@ class RegisterInjection extends StatelessWidget {
                     label: r'Quận/Huyện',
                     searchPlaceholder: r'Nhập tên Quận/Huyện',
                     onSelectedData: (item) async {
-                      var id = int.tryParse(item.value.toString());
+                      var id = int.tryParse(item.id.toString());
                       await controller.getPhuongXa(id);
                     },
                   ),
@@ -139,7 +139,7 @@ class RegisterInjection extends StatelessWidget {
                     label: 'Cơ sở y tế',
                     searchPlaceholder: r'Nhập tên Cơ sở y tế',
                     onSelectedData: (item) async {
-                      var id = int.tryParse(item.value.toString());
+                      var id = int.tryParse(item.id.toString());
                       await controller.getDiaBanCoSo(id);
                     },
                   ),
@@ -212,7 +212,7 @@ class RegisterInjection extends StatelessWidget {
                         title: r'Đăng ký tiêm',
                         color: AppColor.main,
                         icon: Icons.save,
-                        onTap: () {},
+                        onTap: () => controller.register(),
                       )
                     ],
                   ),

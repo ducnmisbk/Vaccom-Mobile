@@ -75,7 +75,7 @@ class _CustomPickerInputState extends State<CustomPickerInput> {
     }
     if ((showSearchBar && data.length > 10) && !noSort)
       data.sort((a, b) =>
-          TiengViet.parse(a.title).compareTo(TiengViet.parse(b.title)));
+          TiengViet.parse(a.name).compareTo(TiengViet.parse(b.name)));
 
     showActionSheetBar(
         data: data,
@@ -92,7 +92,7 @@ class _CustomPickerInputState extends State<CustomPickerInput> {
         },
         selectData: (PickerItem dataValue) async {
           if (selectData != null) await selectData(dataValue);
-          widget.controller.dataValue = dataValue.value;
+          widget.controller.dataValue = dataValue.id;
 
           if (widget.onSelectedData != null) {
             widget.onSelectedData(dataValue);
@@ -259,7 +259,7 @@ class _DropDownContentState extends State<DropDownContent> {
   filterData(value) {
     String valueParse = TiengViet.parse(value).toLowerCase();
     var listData = data
-        .where((element) => TiengViet.parse(element.title)
+        .where((element) => TiengViet.parse(element.name)
             .toLowerCase()
             .replaceAll('ð', 'd')
             .contains(valueParse))
@@ -319,7 +319,7 @@ class _DropDownContentState extends State<DropDownContent> {
     return SafeArea(
       top: true,
       child: Container(
-        height: min(444, Get.height / 2),
+        height: min(500, Get.height / 2),
         child: ClipRRect(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(16),
@@ -395,9 +395,9 @@ class _DropDownContentState extends State<DropDownContent> {
                 ),
                 showSearch
                     ? Container(
-                        padding: EdgeInsets.only(top: 16, left: 16, right: 16),
                         child: CustomSearchBar(
                           placeholder: widget.placeholder,
+                          radius: 0,
                           background: AppColor.backgroundWhite,
                           controller: searchController,
                           showButtons: widget.showButtonSearch,
@@ -503,7 +503,7 @@ class _DropDownContentState extends State<DropDownContent> {
                         (int index) {
                           return ListTile(
                             title: Text(
-                              dataFilter[index].title,
+                              dataFilter[index].name,
                               style: GoogleFonts.roboto(),
                             ),
                             onTap: () =>
