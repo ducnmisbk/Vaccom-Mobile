@@ -9,6 +9,6 @@ const mockUser = r'''{
     "diaBanCoSoId": 0,
     "coSoYTeId": 0,
     "nguoiTiemChungId": 0,
-    "quanTriHeThong": true,
+    "quanTriHeThong": 0,
     "khoaTaiKhoan": false
 }''';
